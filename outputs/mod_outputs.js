@@ -62,10 +62,10 @@ define(['require', 'mods/mod_ui'], function(require) {
             ui.ui_menu_action(output_array, "mod_outputs")
          }
          label.onmouseover = function(e) {
-            this.style.background = ui.defaults.highlight_background_color
+           this.setAttribute("class", "menu_label labelHover")
          }
          label.onmouseout = function(e) {
-            this.style.background = ui.defaults.background_color
+           this.setAttribute("class", "menu_label")
          }
       }
 

@@ -127,14 +127,14 @@ function(require) {
          ui.ui_clear()
          ui.ui_show_input()
          ui.ui_menu_process()
-         }
-      label.onmouseover = function(e) {
-         this.style.background = ui.defaults.highlight_background_color
-         }
-      label.onmouseout = function(e) {
-         this.style.background = ui.defaults.background_color
-         }
       }
+      label.onmouseover = function(e) {
+        this.setAttribute("class", "menu_label labelHover")
+      }
+      label.onmouseout = function(e) {
+        this.setAttribute("class", "menu_label")
+      }
+   }
    //
    // mod_GCC_laser_path
    //    convert path

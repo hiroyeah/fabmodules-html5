@@ -1,4 +1,17 @@
 //
+// define input types and handlers
+//
+var input_array = [
+   ["image (.png)", "inputs/mod_png.js"],
+   ["drawing (.svg)", "inputs/mod_svg.js"],
+   ["path (.svg)", ""],
+   ["mesh (.stl)", "inputs/mod_stl.js"],
+   ["volume (.vol)", "inputs/mod_vol.js"],
+   ["volume (.gif)", ""],
+   ["frep (.f)", ""],
+   ["load settings", "inputs/mod_settings.js"]
+]
+//
 // mod_inputs.js
 //   fab modules inputs
 //
@@ -13,21 +26,6 @@
 //
 
 define(['mods/mod_ui'], function(ui) {
-
-
-   //
-   // define input types and handlers
-   //
-   var input_array = [
-      ["image (.png)", "inputs/mod_png.js"],
-      ["drawing (.svg)", "inputs/mod_svg.js"],
-      ["path (.svg)", ""],
-      ["mesh (.stl)", "inputs/mod_stl.js"],
-      ["volume (.vol)", "inputs/mod_vol.js"],
-      ["volume (.gif)", ""],
-      ["frep (.f)", ""],
-      ["load settings", "inputs/mod_settings.js"]
-   ]
 
   //
   // mod_inputs
@@ -54,10 +52,10 @@ define(['mods/mod_ui'], function(ui) {
       ui.ui_view_reset();
     }
     label.onmouseover = function(e) {
-      this.style.background = ui.defaults.highlight_background_color;
+      this.setAttribute("class", "menu_label labelHover")
     }
     label.onmouseout = function(e) {
-      this.style.background = ui.defaults.background_color;
+      this.setAttribute("class", "menu_label")
     }
   }
 

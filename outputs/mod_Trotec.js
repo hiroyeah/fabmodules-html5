@@ -143,10 +143,10 @@ define(['require',
          ui.ui_menu_process()
       }
       label.onmouseover = function(e) {
-         this.style.background = ui.defaults.highlight_background_color
+        this.setAttribute("class", "menu_label labelHover")
       }
       label.onmouseout = function(e) {
-         this.style.background = ui.defaults.background_color
+        this.setAttribute("class", "menu_label")
       }
    }
    //
