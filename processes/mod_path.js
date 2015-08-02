@@ -203,7 +203,7 @@ define(['require',
 
       function mod_path_image_2D_controls(routine,modname) {
          var controls = findEl("mod_process_controls")
-         controls.innerHTML = "<br><b>process</b>"
+         controls.innerHTML = "<b>process</b>"
          // controls.innerHTML += "<br><input type='button' id='mod_path' value='calculate'\
          //    onclick='mod_path_image_2D()'>"
 
@@ -363,7 +363,7 @@ define(['require',
 
       function mod_path_image_21D_controls(routine,modname) {
          var controls = findEl("mod_process_controls")
-         controls.innerHTML = "<br><b>process</b>"
+         controls.innerHTML = "<b>process</b>"
          //    controls.innerHTML += "<br><input type='button' id='mod_path' value='calculate'\
          // onclick='mod_path_image_21D()'>"
 
@@ -528,7 +528,7 @@ define(['require',
 
       function mod_path_image_22D_controls(routine,modname) {
          var controls = findEl("mod_process_controls")
-         controls.innerHTML = "<br><b>process</b>"
+         controls.innerHTML = "<b>process</b>"
          //    controls.innerHTML += "<br><input type='button' id='mod_path' value='calculate'\
          // onclick='mod_path_image_22D()'>"
          controls.innerHTML += "<br><input type='button' id='mod_path' value='calculate'>"
@@ -681,7 +681,7 @@ define(['require',
 
       function mod_path_image_25D_controls(routine,modname) {
          var controls = findEl("mod_process_controls")
-         controls.innerHTML = "<br><b>process</b>"
+         controls.innerHTML = "<b>process</b>"
          //    controls.innerHTML += "<br><input type='button' id='mod_path' value='calculate'\
          // onclick='mod_path_image_25D()'>"
          controls.innerHTML += "<br><input type='button' id='mod_path' value='calculate'>"
@@ -839,7 +839,7 @@ define(['require',
 
       function mod_path_image_3D_controls(routine,modname) {
          var controls = findEl("mod_process_controls")
-         controls.innerHTML = "<br><b>process</b>"
+         controls.innerHTML = "<b>process</b>"
          //    controls.innerHTML += "<br><input type='button' id='mod_path' value='calculate'\
          // onclick='mod_path_image_3D()'>"
          controls.innerHTML += "<br><input type='button' id='mod_path' value='calculate'>"
@@ -910,7 +910,7 @@ define(['require',
 
       function mod_path_image_halftone_controls(type, routine,modname) {
          var controls = findEl("mod_process_controls")
-         controls.innerHTML = "<br><b>process</b>"
+         controls.innerHTML = "<b>process</b>"
          // controls.innerHTML += "<br><input type='button' id='mod_path' value='calculate'\
          //       onclick='mod_path_image_halftone_calculate()'>"
          controls.innerHTML += "<br><input type='button' id='mod_path' value='calculate'>"

@@ -19,10 +19,11 @@ body {
   margin: 20px;
 }
 h1 {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   font-weight: 400;
   margin: 0;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 h2 {
   font-size: 1.2rem;
@@ -37,6 +38,17 @@ a {
 }
 input, select, label, span, p, a {
   font-weight: 400;
+}
+input[type="text"],
+input[type="button"],
+select{
+  border: 1px solid lightgray;
+  border-radius: 0;
+  background-color: white;
+  padding: 0.2rem 0.4rem;
+}
+input[type="button"]:hover {
+  background-color: lightgray;
 }
 
 #wrapper {
@@ -61,10 +73,14 @@ input, select, label, span, p, a {
   width: 270px;
   margin-right: 0;
 }
+#mod_controls > div select,
 #mod_controls > div input[type="text"],
 #mod_controls > div input[type="radio"],
 #mod_controls > div input[type="checkbox"] {
   float: right;
+}
+#mod_controls .controls_sub {
+  font-size: 0.8rem;
 }
 
 /* MENU PANEL */
@@ -81,14 +97,42 @@ input, select, label, span, p, a {
   float: left;
   width: 180px;
   height: auto;
-  overflow: hidden;
+}
+#mod_menus > span {
+  float: left;
+  height: 40px;
+  display: table;
+  margin: 0 1rem;
+  vertical-align: middle;
+}
+#mod_menus > span p {
+  display: table-cell;
+  vertical-align: middle;
 }
 .menu_label {
   font-size: 1.1rem;
   display: block;
-  padding: 0.2rem 0.4rem;
+  padding: 0.4rem;
   cursor: pointer;
   background-color: white;
+  text-align: center;
+  border: 2px solid black;
+}
+.menu_label:hover {
+  background-color: lightgray;
+}
+.menu_list {
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  height: auto;
+  overflow: hidden;
+}
+.menu_list span:first-child {
+  border-top: 2px solid black;
+  margin-top: -2px;
+}
+.menu_list span:last-child {
+  border-bottom: 2px solid black;
 }
 .menu_list span {
   font-size: 0.9rem;
@@ -96,10 +140,10 @@ input, select, label, span, p, a {
   float: left;
   cursor: pointer;
   padding: 0.2rem 0.4rem;
-  background-color: #DDDDDD;
+  background-color: white;
 }
 .menu_list span:hover {
-  background-color: #BBBBBB;
+  background-color: #DDDDDD;
 }
 .menu_list span.disabledList {
   color: #888888;
@@ -110,5 +154,10 @@ input, select, label, span, p, a {
 
 /* CANVAS CONTAINER */
 #mod_display {
-  border: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
+#mod_display canvas {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
 }
