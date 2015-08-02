@@ -65,19 +65,24 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
       //
       // set up UI elements
       //
+      // REMOVED
+      /*
       var span = findEl("mod_prompt")
       span.innerHTML = "<a href='mods.html'>fab modules</a>"
+      */
+
       /* REMOVED */
       // span.setAttribute("style", "display:block;position:absolute;top:" + Defaults.margin + ";left:" + (1.5 * Defaults.margin + span.offsetHeight))
-      globals.mod_menu_width = 2.2 * span.offsetWidth
-      globals.mod_menu_height = span.offsetHeight
+      // globals.mod_menu_width = 2.2 * span.offsetWidth
+      // globals.mod_menu_height = span.offsetHeight
       //
       var span = findEl("mod_logo")
       /* REMOVED */
       /*
        * span.setAttribute("style", "display:block;position:absolute;top:" + Defaults.margin + ";left:" + Defaults.margin + ";width:" + globals.mod_menu_height + ";height:" + globals.mod_menu_height)
        */
-      span.appendChild(ui_CBA(globals.mod_menu_width))
+      // span.appendChild(ui_CBA(globals.mod_menu_width))
+      span.appendChild(ui_CBA(30))
 
       /* REMOVED */
       /*
@@ -556,11 +561,14 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
    //    change prompt message
    //
    exports.ui_prompt = function(m) {
+     /* REMOVED */
+     /* 
       if (m != "")
          findEl("mod_prompt").innerHTML = m
       else
          findEl("mod_prompt").innerHTML =
             "<a href='mods.html'>fab modules</a>"
+            */
    }
    //
    // mod_ui_show_input

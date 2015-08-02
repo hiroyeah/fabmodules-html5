@@ -16,11 +16,13 @@ html {
 }
 body {
   height: auto;
+  margin: 20px;
 }
 h1 {
   font-size: 1.8rem;
   font-weight: 400;
   margin: 0;
+  margin-bottom: 1rem;
 }
 h2 {
   font-size: 1.2rem;
@@ -36,29 +38,77 @@ a {
 input, select, label, span, p, a {
   font-weight: 400;
 }
-.noneDisplay {
-  display: none;
-}
 
+#wrapper {
+  height: auto;
+  overflow: hidden;
+}
 #mod_logo {
   display: inline-block;
   height: 1.4rem;
   width: 1.4rem;
   margin-right: 0.8rem;
 }
-#mod_menus {
-  width: 300px;
+#mod_controls {
+  margin-top: 1rem;
+}
+#mod_controls > div {
+  width: 180px;
   float: left;
+  margin-right: 20px;
+}
+#mod_controls > div:last-child {
+  width: 270px;
+  margin-right: 0;
+}
+#mod_controls > div input[type="text"],
+#mod_controls > div input[type="radio"],
+#mod_controls > div input[type="checkbox"] {
+  float: right;
+}
+
+/* MENU PANEL */
+#menu_wrapper {
+  position: relative;
+  height: 3rem;
+}
+#mod_menus {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#mod_menus > div {
+  float: left;
+  width: 180px;
+  height: auto;
+  overflow: hidden;
 }
 .menu_label {
   font-size: 1.1rem;
+  display: block;
+  padding: 0.2rem 0.4rem;
+  cursor: pointer;
+  background-color: white;
 }
 .menu_list span {
+  font-size: 0.9rem;
   width: 100%;
   float: left;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  background-color: #DDDDDD;
 }
+.menu_list span:hover {
+  background-color: #BBBBBB;
+}
+.menu_list span.disabledList {
+  color: #888888;
+}
+.menu_list span.disabledList:hover {
+  background-color: white;
+}
+
+/* CANVAS CONTAINER */
 #mod_display {
-  width: auto;
-  display: block;
-  margin-left: 300px;
+  border: 2px solid black;
 }
