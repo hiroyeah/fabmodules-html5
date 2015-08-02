@@ -1,0 +1,64 @@
+/* GLOBAL DESIGN */
+@import url(http://fonts.googleapis.com/css?family=RobotoDraft:200,300,400,500,400italic);
+@import url(http://fonts.googleapis.com/css?family=Roboto:200,300,400,500,400italic);
+
+* {
+  font-family : 'RobotoDraft', 'Roboto', YuGothic, '游ゴシック', sans-serif;
+}
+html, body, div, span, h1, h2, h3, h4, h5, h6, ul, li, p {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 16px;
+  line-height: 160%;
+  min-width: 480px;
+}
+body {
+  height: auto;
+}
+h1 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin: 0;
+}
+h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+h3 {
+  font-size: 1.1rem;
+}
+a {
+  color: black;
+  text-decoration:none;
+}
+input, select, label, span, p, a {
+  font-weight: 400;
+}
+.noneDisplay {
+  display: none;
+}
+
+#mod_logo {
+  display: inline-block;
+  height: 1.4rem;
+  width: 1.4rem;
+  margin-right: 0.8rem;
+}
+#mod_menus {
+  width: 300px;
+  float: left;
+}
+.menu_label {
+  font-size: 1.1rem;
+}
+.menu_list span {
+  width: 100%;
+  float: left;
+}
+#mod_display {
+  width: auto;
+  display: block;
+  margin-left: 300px;
+}
