@@ -56,12 +56,6 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
    exports.initGUI = function() {
       var span = findEl("mod_logo")
       span.appendChild(ui_CBA(30))
-      var name = findEl("mod_username");
-      name.addEventListener("change", function(e) {
-        var name_wrapper = findEl("mod_user_menu");
-        name_wrapper.setAttribute("style", "display:none");
-        window.initInputs();
-      }, false)
    }
    //
    // mod_add_process
