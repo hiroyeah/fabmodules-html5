@@ -15,8 +15,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Fab Modules</title>
-    <script type="text/javascript" data-main="main" src="require.js"></script>
-    <link href="css/style.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" data-main="main" src="./require.js"></script>
+    <link href="./css/style.css" type="text/css" rel="stylesheet" />
   </head>
 
   <body>
@@ -28,8 +28,21 @@
 
     <div id="menu_wrapper">
       <div id="mod_menus">
+        <div id="mod_user">
+          <span id="mod_user_label" class="menu_label">User Login</span>
+          <div id="mod_user_menu" class="menu_list">
+            <span>
+              <input type="text" id="mod_username" />
+            </span>
+          </div>
+        </div>
+
+        <span> 
+          <p>></p>
+        </span> 
+
         <div id="mod_inputs">
-          <span id="mod_inputs_label" class="menu_label"></span>
+          <span id="mod_inputs_label" class="menu_label" style="display:none;"></span>
           <div id="mod_inputs_menu" class="menu_list"></div>
         </div>
 

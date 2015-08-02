@@ -34,6 +34,7 @@ define(['mods/mod_ui'], function(ui) {
 
   function mod_inputs() {
     var label = document.getElementById("mod_inputs_label");
+    label.setAttribute("style", "");
     label.innerHTML = "input format";
     label.onclick = function(e) {
       ui.ui_clear();
@@ -50,12 +51,6 @@ define(['mods/mod_ui'], function(ui) {
       ui.ui_prompt("input file to read?");
       ui.ui_menu_file(input_array, "mod_inputs");
       ui.ui_view_reset();
-    }
-    label.onmouseover = function(e) {
-      this.setAttribute("class", "menu_label labelHover")
-    }
-    label.onmouseout = function(e) {
-      this.setAttribute("class", "menu_label")
     }
   }
 

@@ -51,83 +51,17 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
       height: window.innerHeight,
    }
 
-
    var findEl = globals.findEl;
-
-
-
    exports.defaults = Defaults;
-
-
-
-
    exports.initGUI = function() {
-      //
-      // set up UI elements
-      //
-      // REMOVED
-      /*
-      var span = findEl("mod_prompt")
-      span.innerHTML = "<a href='mods.html'>fab modules</a>"
-      */
-
-      /* REMOVED */
-      // span.setAttribute("style", "display:block;position:absolute;top:" + Defaults.margin + ";left:" + (1.5 * Defaults.margin + span.offsetHeight))
-      // globals.mod_menu_width = 2.2 * span.offsetWidth
-      // globals.mod_menu_height = span.offsetHeight
-      //
       var span = findEl("mod_logo")
-      /* REMOVED */
-      /*
-       * span.setAttribute("style", "display:block;position:absolute;top:" + Defaults.margin + ";left:" + Defaults.margin + ";width:" + globals.mod_menu_height + ";height:" + globals.mod_menu_height)
-       */
-      // span.appendChild(ui_CBA(globals.mod_menu_width))
       span.appendChild(ui_CBA(30))
-
-      /* REMOVED */
-      /*
-       * var div = findEl("mod_inputs")
-       * div.setAttribute("style", "position:absolute;top:" + (1.5 * Defaults.margin + globals.mod_menu_height) + ";left:" + Defaults.margin)
-       * var span = findEl("mod_inputs_label")
-       * span.setAttribute("style", "text-align:center;display:block;width:" + globals.mod_menu_width + ";height:" + 1.5 * globals.mod_menu_height)
-       * span.style.background = Defaults.background_color
-       * span.style.color = Defaults.text_color
-
-       * var div = findEl("mod_outputs")
-       * div.setAttribute("style", "position:absolute;top:" + (1.5 * Defaults.margin + globals.mod_menu_height) + ";left:" + (Defaults.margin + globals.mod_menu_width))
-
-       * var span = findEl("mod_outputs_label")
-       * span.setAttribute("style", "text-align:center;display:none;width:" + globals.mod_menu_width + ";height:" + 1.5 * globals.mod_menu_height)
-       * span.style.background = Defaults.background_color
-       * span.style.color = Defaults.text_color
-       * 
-       * var div = findEl("mod_processes")
-       * div.setAttribute("style", "position:absolute;top:" + (1.5 * Defaults.margin + globals.mod_menu_height) + ";left:" + (Defaults.margin + 2 * globals.mod_menu_width))
-       * 
-       * var span = findEl("mod_processes_label")
-       * span.setAttribute("style", "text-align:center;display:none;width:" + globals.mod_menu_width + ";height:" + 1.5 * globals.mod_menu_height)
-       * span.style.background = Defaults.background_color
-       * span.style.color = Defaults.text_color
-
-       * var div = findEl("mod_display")
-       * div.setAttribute("style", "position:absolute;top:" + (2.5 * Defaults.margin + 2 * globals.mod_menu_height) + ";left:" + Defaults.margin + ";width:" + (Defaults.width * .75 - Defaults.margin) + ";height:" + Defaults.height)
-
-       * var canvas = findEl("mod_input_canvas")
-       * canvas.style.width = "100%"
-
-       * var canvas = findEl("mod_process_canvas")
-       * canvas.style.width = "100%"
-
-       * var canvas = findEl("mod_output_canvas")
-       * canvas.style.width = "100%"
-
-       * var canvas = findEl("mod_gl_canvas")
-       * canvas.style.width = "100%"
-
-       * var div = findEl("mod_controls")
-       * div.setAttribute("style", "position:absolute;top:" + (2.5 * Defaults.margin + 2 * globals.mod_menu_height) + ";left:" + (Defaults.width * .75 + Defaults.margin) + ";width:" + (Defaults.width * .25 - Defaults.margin))
-       */
-
+      var name = findEl("mod_username");
+      name.addEventListener("change", function(e) {
+        var name_wrapper = findEl("mod_user_menu");
+        name_wrapper.setAttribute("style", "display:none");
+        window.initInputs();
+      }, false)
    }
    //
    // mod_add_process
@@ -205,6 +139,235 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
          module: mod
       }
    }
+
+   //
+   // mod_ui_clear
+   //    clear displays
+   //
+   exports.ui_clear = function() {
+      exports.ui_prompt("")
+      var display = findEl("mod_display")
+      if (display.contains(findEl("mod_display_path")))
+         display.removeChild(findEl("mod_display_path"))
+      var input_canvas = findEl("mod_input_canvas")
+      input_canvas.style.display = "none"
+      var process_canvas = findEl("mod_process_canvas")
+      process_canvas.style.display = "none"
+      var output_canvas = findEl("mod_output_canvas")
+      output_canvas.style.display = "none"
+      var output_canvas = findEl("mod_gl_canvas")
+      output_canvas.style.display = "none"
+   }
+
+   //
+   // mod_ui_menu_action_item
+   //    add action menu item
+   //
+   var ui_menu_action_item = function(item, menu, label) {
+      var span = document.createElement("span")
+      if (item[1] != "") {
+         span.innerHTML = item[0]
+         span.addEventListener("click", function(e) {
+            if (menu.hasChildNodes()) {
+               menu.innerHTML = ""
+            }
+            label.innerHTML = item[0]
+            exports.ui_prompt("")
+            mod_file.call(item[1])
+         }, false)
+      } else {
+         span.setAttribute("class", "disabledList")
+         span.innerHTML = item[0]
+      }
+      menu.appendChild(span)
+   }
+
+
+   //
+   // mod_ui_menu_action
+   //   build action menu
+   //
+   exports.ui_menu_action = function(items, name) {
+      var menu = findEl(name + "_menu")
+      var label = findEl(name + "_label")
+      if (menu.hasChildNodes()) {
+         menu.innerHTML = ""
+         return
+      }
+      for (var i = 0; i < items.length; ++i) {
+         ui_menu_action_item(items[i], menu, label)
+      }
+   }
+
+   //
+   // mod_ui_menu_eval_item
+   //    add eval menu item
+   //
+   var ui_menu_eval_item = function(item, name) {
+      var menu = findEl(name + "_menu")
+      var label = findEl(name + "_label")
+      var span = document.createElement("span")
+      if (item[1] != "") {
+         span.innerHTML = item[0]
+         span.addEventListener("click", function(e) {
+            if (menu.hasChildNodes()) {
+               menu.innerHTML = ""
+            }
+            label.innerHTML = item[0]
+            exports.ui_prompt("")
+            globals.myeval(item[1])
+         }, false)
+      } else {
+         span.setAttribute("class", "disabledList")
+         span.innerHTML = item[0]
+      }
+      menu.appendChild(span)
+   }
+
+   //
+   // mod_ui_menu_eval
+   //   build eval menu
+   //
+   exports.ui_menu_eval = function(items, name) {
+      var menu = findEl(name + "_menu")
+      if (menu.hasChildNodes()) {
+         menu.innerHTML = ""
+         return
+      }
+      for (var i = 0; i < items.length; ++i) {
+         ui_menu_eval_item(items[i], name)
+      }
+      globals.myeval(globals.settings)
+   }
+
+
+
+   //
+   // mod_ui_menu_file_item
+   //    add file menu item
+   //
+   var ui_menu_file_item = function(item, menu, label) {
+      var span = document.createElement("span")
+      if (item[1] != "") {
+         span.innerHTML = item[0]
+         span.addEventListener("click", function(e) {
+            if (menu.hasChildNodes()) {
+               menu.innerHTML = ""
+            }
+            label.innerHTML = item[0]
+            exports.ui_prompt("")
+            mod_file.call(item[1])
+            var file = findEl("mod_file_input")
+            file.click()
+         }, false)
+      } else {
+         span.setAttribute("class", "disabledList")
+         span.innerHTML = item[0]
+      }
+      menu.appendChild(span)
+   }
+
+   //
+   // mod_ui_menu_file
+   //   build file menu
+   //
+   exports.ui_menu_file = function(items, name) {
+      var menu = findEl(name + "_menu")
+      var label = findEl(name + "_label")
+      if (menu.hasChildNodes()) {
+         menu.innerHTML = ""
+         return
+      }
+      for (var i = 0; i < items.length; ++i) {
+         ui_menu_file_item(items[i], menu, label)
+      }
+   }
+
+
+   //
+   // mod_ui_menu_process_item
+   //    add process menu item
+   //
+   var ui_menu_process_item = function(item, name) {
+      var menu = findEl(name + "_menu")
+      var label = findEl(name + "_label")
+      var span = document.createElement("span")
+      if (item[1] != "") {
+         span.innerHTML = item[0]
+         span.addEventListener("click", function(e) {
+            if (menu.hasChildNodes()) {
+               menu.innerHTML = ""
+            }
+            label.innerHTML = item[0]
+            exports.ui_prompt("")
+            globals.myeval(item[1])
+            var key = "edit_" + item[1].slice(0, -2) + globals.output
+            if (globals.process_edits[key] != undefined)
+               globals.myeval(globals.process_edits[key].func + "()")
+         }, false)
+      } else {
+         span.setAttribute("class", "disabledList")
+         span.innerHTML = item[0]
+      }
+      menu.appendChild(span)
+   }
+   //
+   // mod_ui_menu_process
+   //    build process menu
+   //
+   exports.ui_menu_process = function() {
+      var menu = findEl("mod_processes_menu")
+      if (menu.hasChildNodes()) {
+         menu.innerHTML = ""
+         return
+      }
+      for (var item in globals.processes) {
+         //console.log(item);
+         var fn = globals.processes[item].func + "()"
+         var mod = globals.processes[item].module
+         var modname = globals.processes[item].name
+         //console.log(modname + ' ' + fn);
+         if (mod == globals.output)
+            ui_menu_process_item([modname, fn], "mod_processes")
+      }
+   }
+
+   //
+   // exports.ui_prompt
+   //    change prompt message
+   //
+   //TODO : remove all ui_prompt
+   exports.ui_prompt = function(m) {
+     /* REMOVED */
+     /* 
+      if (m != "")
+         findEl("mod_prompt").innerHTML = m
+      else
+         findEl("mod_prompt").innerHTML =
+            "<a href='mods.html'>fab modules</a>"
+            */
+   }
+   //
+   // mod_ui_show_input
+   //    show input
+   //
+   exports.ui_show_input = function() {
+      var input_canvas = findEl("mod_input_canvas")
+      input_canvas.style.display = "inline"
+   }
+   //
+   // mod_ui_view_reset
+   //    reset view
+   exports.ui_view_reset = function() {
+      globals.dx = ""
+      globals.dy = ""
+      globals.dz = ""
+      globals.rx = ""
+      globals.ry = ""
+      globals.rz = ""
+      globals.s = ""
+   }
+
    //
    // mod_ui_CBA
    //    add CBA logo
@@ -278,317 +441,6 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
       new_circ.setAttribute("fill", "red")
       logo.appendChild(new_circ)
       return logo
-   }
-   //
-   // mod_ui_clear
-   //    clear displays
-   //
-   exports.ui_clear = function() {
-      exports.ui_prompt("")
-      var display = findEl("mod_display")
-      if (display.contains(findEl("mod_display_path")))
-         display.removeChild(findEl("mod_display_path"))
-      var input_canvas = findEl("mod_input_canvas")
-      input_canvas.style.display = "none"
-      var process_canvas = findEl("mod_process_canvas")
-      process_canvas.style.display = "none"
-      var output_canvas = findEl("mod_output_canvas")
-      output_canvas.style.display = "none"
-      var output_canvas = findEl("mod_gl_canvas")
-      output_canvas.style.display = "none"
-   }
-
-
-   //
-   // mod_ui_menu_action_item
-   //    add action menu item
-   //
-   var ui_menu_action_item = function(item, menu, label) {
-      var span = document.createElement("span")
-      if (item[1] != "") {
-         /* REMOVED */
-         // span.setAttribute("style", "text-align:center;width:" + globals.mod_menu_width + ";height:" + globals.mod_menu_height + ";background:" + Defaults.background_color + ";color:" + Defaults.text_color + ";display:block")
-         span.setAttribute("class", "validList")
-         span.innerHTML = item[0]
-         span.addEventListener("mouseout", function(e) {
-            // this.style.background = Defaults.background_color
-            this.setAttribute("class", "validList");
-         }, false)
-         span.addEventListener("mouseover", function(e) {
-            // this.style.background = Defaults.highlight_background_color
-            this.setAttribute("class", "validList listHover");
-         }, false)
-         span.addEventListener("click", function(e) {
-            if (menu.hasChildNodes()) {
-               menu.innerHTML = ""
-            }
-            label.innerHTML = item[0]
-            exports.ui_prompt("")
-            mod_file.call(item[1])
-         }, false)
-      } else {
-         /* REMOVED */
-         // span.setAttribute("style", "text-align:center;width:" + globals.mod_menu_width + ";height:" + globals.mod_menu_height + ";background:" + Defaults.background_color + ";color:" + Defaults.disable_text_color + ";display:block")
-         span.setAttribute("class", "disabledList")
-         span.innerHTML = item[0]
-         span.addEventListener("mouseout", function(e) {
-            // this.style.background = Defaults.background_color
-            this.setAttribute("class", "disabledList");
-         }, false)
-         span.addEventListener("mouseover", function(e) {
-            // this.style.background = Defaults.highlight_background_color
-            this.setAttribute("class", "disabledList diabledListHover");
-         }, false)
-      }
-      menu.appendChild(span)
-   }
-
-
-   //
-   // mod_ui_menu_action
-   //   build action menu
-   //
-   exports.ui_menu_action = function(items, name) {
-      var menu = findEl(name + "_menu")
-      var label = findEl(name + "_label")
-      if (menu.hasChildNodes()) {
-         menu.innerHTML = ""
-         return
-      }
-      for (var i = 0; i < items.length; ++i) {
-         ui_menu_action_item(items[i], menu, label)
-      }
-   }
-
-   //
-   // mod_ui_menu_eval_item
-   //    add eval menu item
-   //
-   var ui_menu_eval_item = function(item, name) {
-      var menu = findEl(name + "_menu")
-      var label = findEl(name + "_label")
-      var span = document.createElement("span")
-      if (item[1] != "") {
-         /* REMOVED */
-         // span.setAttribute("style", "text-align:center;width:" + globals.mod_menu_width + ";height:" + globals.mod_menu_height + ";background:" + Defaults.background_color + ";color:" + Defaults.text_color + ";display:block")
-         span.setAttribute("class", "validList")
-         span.innerHTML = item[0]
-         span.addEventListener("mouseout", function(e) {
-            // this.style.background = Defaults.background_color
-            this.setAttribute("class", "validList");
-         }, false)
-         span.addEventListener("mouseover", function(e) {
-            // this.style.background = Defaults.highlight_background_color
-            this.setAttribute("class", "validList listHover");
-         }, false)
-         span.addEventListener("click", function(e) {
-            if (menu.hasChildNodes()) {
-               menu.innerHTML = ""
-            }
-            label.innerHTML = item[0]
-            exports.ui_prompt("")
-            globals.myeval(item[1])
-         }, false)
-      } else {
-         /* REMOVED */
-         // span.setAttribute("style", "text-align:center;width:" + globals.mod_menu_width + ";height:" + globals.mod_menu_height + ";background:" + Defaults.background_color + ";color:" + Defaults.disable_text_color + ";display:block")
-         span.setAttribute("class", "disabledList")
-         span.innerHTML = item[0]
-         span.addEventListener("mouseout", function(e) {
-            // this.style.background = Defaults.background_color
-            this.setAttribute("class", "disabledList");
-         }, false)
-         span.addEventListener("mouseover", function(e) {
-            // this.style.background = Defaults.highlight_background_color
-            this.setAttribute("class", "disabledList diabledListHover");
-         }, false)
-      }
-      menu.appendChild(span)
-   }
-
-   //
-   // mod_ui_menu_eval
-   //   build eval menu
-   //
-   exports.ui_menu_eval = function(items, name) {
-      var menu = findEl(name + "_menu")
-      if (menu.hasChildNodes()) {
-         menu.innerHTML = ""
-         return
-      }
-      for (var i = 0; i < items.length; ++i) {
-         ui_menu_eval_item(items[i], name)
-      }
-      globals.myeval(globals.settings)
-   }
-
-
-
-   //
-   // mod_ui_menu_file_item
-   //    add file menu item
-   //
-   var ui_menu_file_item = function(item, menu, label) {
-      var span = document.createElement("span")
-      if (item[1] != "") {
-         /* REMOVED */
-         // span.setAttribute("style", "text-align:center;width:" + globals.mod_menu_width + ";height:" + globals.mod_menu_height + ";background:" + Defaults.background_color + ";color:" + Defaults.text_color + ";display:block")
-         span.setAttribute("class", "validList")
-         span.innerHTML = item[0]
-         span.addEventListener("mouseout", function(e) {
-            // this.style.background = Defaults.background_color
-            this.setAttribute("class", "validList");
-         }, false)
-         span.addEventListener("mouseover", function(e) {
-            // this.style.background = Defaults.highlight_background_color
-            this.setAttribute("class", "validList listHover");
-         }, false)
-         span.addEventListener("click", function(e) {
-            if (menu.hasChildNodes()) {
-               menu.innerHTML = ""
-            }
-            label.innerHTML = item[0]
-            exports.ui_prompt("")
-            mod_file.call(item[1])
-            var file = findEl("mod_file_input")
-            file.click()
-         }, false)
-      } else {
-         /* REMOVED */
-         // span.setAttribute("style", "text-align:center;width:" + globals.mod_menu_width + ";height:" + globals.mod_menu_height + ";background:" + Defaults.background_color + ";color:" + Defaults.disable_text_color + ";display:block")
-         span.setAttribute("class", "disabledList")
-         span.innerHTML = item[0]
-         span.addEventListener("mouseout", function(e) {
-            // this.style.background = Defaults.background_color
-            this.setAttribute("class", "disabledList");
-         }, false)
-         span.addEventListener("mouseover", function(e) {
-            // this.style.background = Defaults.highlight_background_color
-            this.setAttribute("class", "disabledList diabledListHover");
-         }, false)
-      }
-      menu.appendChild(span)
-   }
-
-   //
-   // mod_ui_menu_file
-   //   build file menu
-   //
-   exports.ui_menu_file = function(items, name) {
-      var menu = findEl(name + "_menu")
-      var label = findEl(name + "_label")
-      if (menu.hasChildNodes()) {
-         menu.innerHTML = ""
-         return
-      }
-      for (var i = 0; i < items.length; ++i) {
-         ui_menu_file_item(items[i], menu, label)
-      }
-   }
-
-
-   //
-   // mod_ui_menu_process_item
-   //    add process menu item
-   //
-   var ui_menu_process_item = function(item, name) {
-      var menu = findEl(name + "_menu")
-      var label = findEl(name + "_label")
-      var span = document.createElement("span")
-      if (item[1] != "") {
-         /* REMOVED */
-         // span.setAttribute("style", "text-align:center;width:" + globals.mod_menu_width + ";height:" + globals.mod_menu_height + ";background:" + Defaults.background_color + ";color:" + Defaults.text_color + ";display:block")
-         span.setAttribute("class", "validList")
-         span.innerHTML = item[0]
-         span.addEventListener("mouseout", function(e) {
-            // this.style.background = Defaults.background_color
-            this.setAttribute("class", "validList");
-         }, false)
-         span.addEventListener("mouseover", function(e) {
-            // this.style.background = Defaults.highlight_background_color
-            this.setAttribute("class", "validList listHover");
-         }, false)
-         span.addEventListener("click", function(e) {
-            if (menu.hasChildNodes()) {
-               menu.innerHTML = ""
-            }
-            label.innerHTML = item[0]
-            exports.ui_prompt("")
-            globals.myeval(item[1])
-            var key = "edit_" + item[1].slice(0, -2) + globals.output
-            if (globals.process_edits[key] != undefined)
-               globals.myeval(globals.process_edits[key].func + "()")
-         }, false)
-      } else {
-         /* REMOVED */
-         // span.setAttribute("style", "text-align:center;width:" + globals.mod_menu_width + ";height:" + globals.mod_menu_height + ";background:" + Defaults.background_color + ";color:" + Defaults.disable_text_color + ";display:block")
-         span.setAttribute("class", "disabledList")
-         span.innerHTML = item[0]
-         span.addEventListener("mouseout", function(e) {
-            // this.style.background = Defaults.background_color
-            this.setAttribute("class", "disabledList");
-         }, false)
-         span.addEventListener("mouseover", function(e) {
-            // this.style.background = Defaults.highlight_background_color
-            this.setAttribute("class", "disabledList diabledListHover");
-         }, false)
-      }
-      menu.appendChild(span)
-   }
-   //
-   // mod_ui_menu_process
-   //    build process menu
-   //
-   exports.ui_menu_process = function() {
-      var menu = findEl("mod_processes_menu")
-      if (menu.hasChildNodes()) {
-         menu.innerHTML = ""
-         return
-      }
-      for (var item in globals.processes) {
-         //console.log(item);
-         var fn = globals.processes[item].func + "()"
-         var mod = globals.processes[item].module
-         var modname = globals.processes[item].name
-         //console.log(modname + ' ' + fn);
-         if (mod == globals.output)
-            ui_menu_process_item([modname, fn], "mod_processes")
-      }
-   }
-
-   //
-   // exports.ui_prompt
-   //    change prompt message
-   //
-   exports.ui_prompt = function(m) {
-     /* REMOVED */
-     /* 
-      if (m != "")
-         findEl("mod_prompt").innerHTML = m
-      else
-         findEl("mod_prompt").innerHTML =
-            "<a href='mods.html'>fab modules</a>"
-            */
-   }
-   //
-   // mod_ui_show_input
-   //    show input
-   //
-   exports.ui_show_input = function() {
-      var input_canvas = findEl("mod_input_canvas")
-      input_canvas.style.display = "inline"
-   }
-   //
-   // mod_ui_view_reset
-   //    reset view
-   exports.ui_view_reset = function() {
-      globals.dx = ""
-      globals.dy = ""
-      globals.dz = ""
-      globals.rx = ""
-      globals.ry = ""
-      globals.rz = ""
-      globals.s = ""
    }
 
    return exports;
