@@ -140,10 +140,10 @@ input[type="button"]:hover {
   float: left;
   cursor: pointer;
   padding: 0.2rem 0.4rem;
-  background-color: white;
+  background-color: rgba(256,256,256,0.9);
 }
 .menu_list span:hover {
-  background-color: #DDDDDD;
+  background-color: rgba(200,200,200,0.9);
 }
 .menu_list span.disabledList {
   color: #888888;
