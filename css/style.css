@@ -52,6 +52,14 @@ select{
 input[type="button"]:hover {
   background-color: lightgray;
 }
+input#mod_username {
+  border: 0;
+  width: 100%;
+  margin-top: -0.2rem;
+  margin-bottom: -0.2rem;
+  margin-left: -0.4rem;
+  padding: 0.6rem 0.4rem;
+}
 
 #wrapper {
   height: auto;
@@ -142,10 +150,10 @@ input[type="button"]:hover {
   float: left;
   cursor: pointer;
   padding: 0.2rem 0.4rem;
-  background-color: rgba(256,256,256,0.9);
+  background-color: rgba(256,256,256,0.95);
 }
 .menu_list span:hover {
-  background-color: rgba(200,200,200,0.9);
+  background-color: rgba(200,200,200,0.95);
 }
 .menu_list span.disabledList {
   color: #888888;

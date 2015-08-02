@@ -1,0 +1,30 @@
+{
+  "name": "fabmodules-html5",
+  "version": "1.0.0",
+  "description": "html5 fabmodules interface",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.2",
+    "fs": "0.0.2",
+    "http": "^0.0.0",
+    "jquery": "^2.1.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node ./app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/klee-arc/fabmodules-html5.git"
+  },
+  "keywords": [
+    "node",
+    "fabmodules"
+  ],
+  "author": "klee-arc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/klee-arc/fabmodules-html5/issues"
+  },
+  "homepage": "https://github.com/klee-arc/fabmodules-html5"
+}

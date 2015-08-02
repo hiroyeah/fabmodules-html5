@@ -54,8 +54,8 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
    var findEl = globals.findEl;
    exports.defaults = Defaults;
    exports.initGUI = function() {
-      var span = findEl("mod_logo")
-      span.appendChild(ui_CBA(30))
+      var span = findEl("mod_logo");
+      span.appendChild(ui_CBA(30));
    }
    //
    // mod_add_process
@@ -168,6 +168,12 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
             label.innerHTML = item[0]
             exports.ui_prompt("")
             mod_file.call(item[1])
+            /* logger : record output */
+            $.get("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : "Output : " + item[0]
+                });
          }, false)
       } else {
          span.setAttribute("class", "disabledList")
@@ -210,6 +216,12 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
             label.innerHTML = item[0]
             exports.ui_prompt("")
             globals.myeval(item[1])
+            /* logger */
+            $.get("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : item[0]
+                });
          }, false)
       } else {
          span.setAttribute("class", "disabledList")
@@ -251,6 +263,12 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
             label.innerHTML = item[0]
             exports.ui_prompt("")
             mod_file.call(item[1])
+            /* logger : record input */
+            $.get("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : "Input : " + item[0]
+                });
             var file = findEl("mod_file_input")
             file.click()
          }, false)
@@ -298,6 +316,12 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
             var key = "edit_" + item[1].slice(0, -2) + globals.output
             if (globals.process_edits[key] != undefined)
                globals.myeval(globals.process_edits[key].func + "()")
+            /* logger : record process */
+            $.get("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : "Process : " + item[0]
+                });
          }, false)
       } else {
          span.setAttribute("class", "disabledList")

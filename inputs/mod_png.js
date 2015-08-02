@@ -55,7 +55,12 @@ define(['require',
       globals.input_file = file_input.files[0]
       globals.input_name = file_input.files[0].name
       globals.input_basename = file.basename(globals.input_name)
-      console.log("record") 
+      /* logger : record filename */
+      $.get("/record", 
+          {
+            user : document.getElementById("mod_username").value,
+            content : "Filename : " + file_input.files[0].name
+          });
       //
       // read as binary string
       //
