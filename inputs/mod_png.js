@@ -180,13 +180,19 @@ define(['require',
          controls.innerHTML = input_controls_tpl(ctx);
 
          var file_input = findEl("mod_file_input")
-         findEl("mod_dpi",false).addEventListener("keyup", function() {
-            globals.dpi = parseFloat(findEl("mod_dpi").value);
-            findEl("mod_mm").innerHTML = (25.4 * globals.width / globals.dpi).toFixed(3) + " x " + (25.4 * globals.height / globals.dpi).toFixed(3) + " mm";
-            findEl("mod_in").innerHTML = (globals.width / globals.dpi).toFixed(3) + " x " + (globals.height / globals.dpi).toFixed(3) + " in";
-         });
+         var mod_dpi = findEl("mod_dpi",false);
+         if (typeof mod_dpi !== undefined && mod_dpi != null) {
+           console.log(mod_dpi);
+           mod_dpi.addEventListener("keyup", function() {
+             globals.dpi = parseFloat(findEl("mod_dpi").value);
+             findEl("mod_mm").innerHTML = (25.4 * globals.width / globals.dpi).toFixed(3) + " x " + (25.4 * globals.height / globals.dpi).toFixed(3) + " mm";
+             findEl("mod_in").innerHTML = (globals.width / globals.dpi).toFixed(3) + " x " + (globals.height / globals.dpi).toFixed(3) + " in";
+           });
+         }
 
-         findEl('invert_image_btn',false).addEventListener("click", function() {
+         var invert_image_btn = findEl('invert_image_btn',false);
+         if (typeof invert_image_btn !== undefined && invert_image_btn != null) {
+         invert_image_btn.addEventListener("click", function() {
             ui.ui_clear();
             var canvas = findEl("mod_input_canvas");
             canvas.style.display = "inline";
@@ -195,6 +201,7 @@ define(['require',
             imageUtils.invert(img);
             ctx.putImageData(img, 0, 0);
          });
+         }
       }
       //
       // call outputs
