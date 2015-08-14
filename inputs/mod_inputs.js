@@ -1,6 +1,12 @@
 //
 // define input types and handlers
 //
+
+/*
+ * mod_inputs()
+ *
+ */
+
 var input_array = [
    ["image (.png)", "inputs/mod_png.js"],
    ["drawing (.svg)", "inputs/mod_svg.js"],

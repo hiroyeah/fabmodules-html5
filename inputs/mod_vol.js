@@ -12,6 +12,17 @@
 // liability.
 //
 
+/*
+ * mod_load_handler()
+ * mod_vol_read_handler()
+ * mod_vol_draw_layer()
+ * mod_vol_draw_layer_handler()
+ * mod_vol_draw_layer_mesh_handler()
+ * mod_vol_save_stl()
+ * mod_vol_save_stl_start_handler()
+ * mod_vol_save_stl_read_handler()
+ */
+
 define(['require',
    'handlebars',
    'text!templates/mod_vol_input_controls.html',

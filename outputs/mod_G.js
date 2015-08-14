@@ -112,12 +112,6 @@ define(['require', 'handlebars', 'mods/mod_ui', 'mods/mod_globals', 'text!templa
          ui.ui_show_input()
          ui.ui_menu_process()
       }
-      label.onmouseover = function(e) {
-        this.setAttribute("class", "menu_label labelHover")
-      }
-      label.onmouseout = function(e) {
-        this.setAttribute("class", "menu_label")
-      }
    }
    //
    // mod_G_path

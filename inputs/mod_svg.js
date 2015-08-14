@@ -12,6 +12,14 @@
 // liability.
 //
 
+/*
+ * mod_load_handler()
+ * mod_svg_read_handler()
+ * mod_svg_text_load_handler()
+ * mod_svg_URL_load_handler()
+ * mod_svg_reload()
+ */
+
 define(['require',
    'handlebars',
    'mods/mod_ui',

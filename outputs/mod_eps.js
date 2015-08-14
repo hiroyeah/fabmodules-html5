@@ -72,12 +72,6 @@ define(['require', 'mods/mod_ui', 'mods/mod_globals'], function(require) {
          ui.ui_show_input()
          ui.ui_menu_process()
       }
-      label.onmouseover = function(e) {
-        this.setAttribute("class", "menu_label labelHover")
-      }
-      label.onmouseout = function(e) {
-        this.setAttribute("class", "menu_label")
-      }
    }
    //
    // mod_eps_path

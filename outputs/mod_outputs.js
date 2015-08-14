@@ -61,12 +61,6 @@ define(['require', 'mods/mod_ui'], function(require) {
             div.innerHTML = ""
             ui.ui_menu_action(output_array, "mod_outputs")
          }
-         label.onmouseover = function(e) {
-           this.setAttribute("class", "menu_label labelHover")
-         }
-         label.onmouseout = function(e) {
-           this.setAttribute("class", "menu_label")
-         }
       }
 
    return {

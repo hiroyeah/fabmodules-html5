@@ -206,12 +206,6 @@ define(['require', 'handlebars', 'text!templates/mod_roland_mill_controls.html',
          ui.ui_show_input()
          ui.ui_menu_process()
       }
-      label.onmouseover = function(e) {
-        this.setAttribute("class", "menu_label labelHover")
-      }
-      label.onmouseout = function(e) {
-        this.setAttribute("class", "menu_label")
-      }
    }
    
 

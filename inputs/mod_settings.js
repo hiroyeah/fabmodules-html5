@@ -12,6 +12,12 @@
 // liability.
 //
 
+/*
+ * mod_load_handler()
+ * mod_settings_read_handler()
+ * mod_settings_load_handler()
+ */
+
 define(['mods/mod_globals', 'mods/mod_ui', 'mods/mod_file'], function(globals, ui, fileUtils) {
 
    var findEl = globals.findEl;

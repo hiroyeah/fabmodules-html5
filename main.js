@@ -6,16 +6,17 @@ require.config({
 
 });
 
-require(["mods/mod_ui","users/mod_users", "node_modules/jquery/dist/jquery.min"], function(mod_ui, mod_users, jquery){
+require([
+  "mods/mod_ui",
+  "users/mod_users", 
+  "node_modules/jquery/dist/jquery.min"
+  ], 
+  function(mod_ui, mod_users, jquery){
+    mod_users.initUsers();
+    // temporary workaround for add_process and edit_process
+    // ideally we could have a json process descriptor and a global process registry
 
-  mod_users.initUsers();
-  // mod_inputs.initInputs();
-
-  // temporary workaround for add_process and edit_process
-  // ideally we could have a json process descriptor and a global process registry
-
-  window.mod_add_process = mod_ui.add_process;
-  window.mod_edit_process = mod_ui.edit_process;
-
-
-});
+    window.mod_add_process = mod_ui.add_process;
+    window.mod_edit_process = mod_ui.edit_process;
+  }
+);

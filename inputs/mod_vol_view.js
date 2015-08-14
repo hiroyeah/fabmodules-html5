@@ -12,6 +12,11 @@
 // liability.
 //
 
+/*
+ * mod_vol_mesh_draw()
+ * mod_vol_hist_draw()
+ */
+
 define(['require',
    'mods/mod_ui',
    'mods/mod_globals',

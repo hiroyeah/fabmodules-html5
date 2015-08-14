@@ -12,6 +12,13 @@
 // liability.
 //
 
+/*
+ * mod_load_handler()
+ * mod_png_read_handler()
+ * mod_png_binary_load_handler()
+ * mod_png_URL_load_handler()
+ */
+
 define(['require',
    'handlebars',
    'mods/mod_ui',
