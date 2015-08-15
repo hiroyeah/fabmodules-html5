@@ -1,6 +1,6 @@
 Fab Modules Interface Revision Project
 
-> Based and inspired by HTML5 version of fabmodules (https://github.com/FabModules/fabmodules-html5["https://github.com/FabModules/fabmodules-html5"]),
+> Based and inspired by [HTML5 version of fabmodules](https://github.com/FabModules/fabmodules-html5),
 > this project aims to reconstruct JavaScript functions
 > into a revisable and easily understood shape,
 > and also to add a bit of design to the interface.
