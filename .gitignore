@@ -3,4 +3,5 @@ mod_server/npm-debug.log
 log/*
 node_modules/
 npm-debug.log
+*.swp
 

@@ -20,7 +20,8 @@ app.get('/record', function(req){
   console.log(data);
 });
 
-app.listen(3000, function() { console.log('listening')});
+PORT = process.env.PORT || 3000;
+app.listen(PORT, function() { console.log('listening on ' + PORT)});
 
 
 var currentMonth = function() {
