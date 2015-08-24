@@ -216,7 +216,7 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
             label.innerHTML = item[0]
             exports.ui_prompt("")
             globals.myeval(item[1])
-            /* logger */
+            /* logger : record username */
             $.get("/record", 
                 {
                   user : document.getElementById("mod_username").value,
