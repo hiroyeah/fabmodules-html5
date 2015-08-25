@@ -9,10 +9,20 @@ var fs = require('fs');
 app.use('/', express.static(__dirname));
 app.get('/', express.static(__dirname + '/index.html'));
 app.get('/record', function(req){
-  var data = {
-    "user" : req.query.user,
-    "content" : req.query.content,
-    "time" : currentTime()
+  var data;
+  if (req.query.params) {
+    data = {
+      "user" : req.query.user,
+      "content" : req.query.content,
+      "params" : req.query.params,
+      "time" : currentTime()
+    }
+  } else {
+    data = {
+      "user" : req.query.user,
+      "content" : req.query.content,
+      "time" : currentTime()
+    }
   }
   fs.appendFile('log/'+currentMonth()+'.txt', JSON.stringify(data) + "\n", function (err) {
     if (err) throw err;

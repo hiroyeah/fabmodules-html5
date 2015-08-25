@@ -296,7 +296,6 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
    }
 
 
-   //
    // mod_ui_menu_process_item
    //    add process menu item
    //
@@ -317,10 +316,40 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
             if (globals.process_edits[key] != undefined)
                globals.myeval(globals.process_edits[key].func + "()")
             /* logger : record process */
+
+                 /* TODO
+            var input_vals = new Object();
+            var output_vals = new Object();
+            var process_vals = new Object();
+            inputs = $("#mod_input_controls > select, #mod_input_controls > input");
+            for (var i=0; i<inputs.length; i++) {
+              input_vals[inputs[i].id] = inputs[i].value;
+            }
+            outputs = $("#mod_output_controls > select, #mod_output_controls > input");
+            for (var i=0; i<outputs.length; i++) {
+              output_vals[outputs[i].id] = outputs[i].value;
+            }
+            processes = $("#mod_process_controls > select, #mod_process_controls > input");
+            for (var i=0; i<processes.length; i++) {
+              process_vals[processes[i].id] = processes[i].value;
+              console.log(processes[i].value);
+            }
+
             $.get("/record", 
                 {
                   user : document.getElementById("mod_username").value,
-                  content : "Process : " + item[0]
+                  content : "Process : " + item[0],
+                  params : {
+                    input : JSON.stringify(input_vals),
+                    output : JSON.stringify(output_vals),
+                    process : JSON.stringify(process_vals)
+                  }
+                });
+            */
+            $.get("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : "Process : " + item[0],
                 });
          }, false)
       } else {
