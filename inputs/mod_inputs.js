@@ -48,7 +48,11 @@ define(['mods/mod_ui'], function(ui) {
       div.innerHTML = "";
       var div = document.getElementById("mod_process_controls");
       div.innerHTML = "";
-      ui.ui_prompt("input file to read?");
+      var div = document.getElementById("mod_commands")
+      div.innerHTML = ""
+      var div = document.getElementById("mod_manipulate")
+      div.innerHTML = ""
+      // ui.ui_prompt("input file to read?");
       ui.ui_menu_file(input_array, "mod_inputs");
       ui.ui_view_reset();
     }

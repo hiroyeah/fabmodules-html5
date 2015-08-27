@@ -160,22 +160,6 @@ define(['require',
             in_w: (globals.width / globals.dpi).toFixed(3),
             in_h: (globals.height / globals.dpi).toFixed(3)
          }
-         // controls.innerHTML = "<b>input</b><br>"
-         // controls.innerHTML += "file: " + globals.input_name + "<br>"
-         // controls.innerHTML += "dpi: "
-         // controls.innerHTML += "<input type='text' id='mod_dpi' size='3' value=" + globals.dpi.toFixed(3) + ">";
-         // controls.innerHTML += "<br>";
-         // controls.innerHTML += "size:<br>"
-         // controls.innerHTML += img.width + " x " + img.height + " px<br>"
-         // controls.innerHTML += "<span id='mod_mm'>" +
-         //    (25.4 * globals.width / globals.dpi).toFixed(3) + " x " +
-         //    (25.4 * globals.height / globals.dpi).toFixed(3) + " mm</span><br>"
-         // controls.innerHTML += "<span id='mod_in'>" +
-         //    (globals.width / globals.dpi).toFixed(3) + " x " +
-         //    (globals.height / globals.dpi).toFixed(3) + " in</span><br>"
-         // controls.innerHTML += "<input type='button' value='invert image' id='invert_image_btn'>";
-
-         //console.log(input_controls_tpl(ctx))
 
          controls.innerHTML = input_controls_tpl(ctx);
 

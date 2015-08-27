@@ -59,13 +59,11 @@ define(['require', 'mods/mod_ui'], function(require) {
             div.innerHTML = ""
             var div = document.getElementById("mod_process_controls")
             div.innerHTML = ""
+            var div = document.getElementById("mod_commands")
+            div.innerHTML = ""
+            var div = document.getElementById("mod_manipulate")
+            div.innerHTML = ""
             ui.ui_menu_action(output_array, "mod_outputs")
-         }
-         label.onmouseover = function(e) {
-           this.setAttribute("class", "menu_label labelHover")
-         }
-         label.onmouseout = function(e) {
-           this.setAttribute("class", "menu_label")
          }
       }
 

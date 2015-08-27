@@ -21,6 +21,7 @@ define(['require',
    'handlebars',
    'text!templates/mod_path_calculate.html',
    'text!templates/mod_path_file_controls.html',
+   'text!templates/mod_path_file_controls_inner.html',
    'text!templates/mod_path_image_2D_controls.html',
    'text!templates/mod_path_image_21D_controls.html',
    'text!templates/mod_path_image_22D_controls.html',
@@ -37,6 +38,7 @@ define(['require',
    var handlebars = require('handlebars')
    var mod_path_calculate_tpl = handlebars.compile(require('text!templates/mod_path_calculate.html'))
    var mod_path_file_controls_tpl = handlebars.compile(require('text!templates/mod_path_file_controls.html'))
+   var mod_path_file_controls_inner_tpl = handlebars.compile(require('text!templates/mod_path_file_controls_inner.html'))
    var mod_path_image_2D_controls_tpl = handlebars.compile(require('text!templates/mod_path_image_2D_controls.html'))
    var mod_path_image_21D_controls_tpl = handlebars.compile(require('text!templates/mod_path_image_21D_controls.html'))
    var mod_path_image_22D_controls_tpl = handlebars.compile(require('text!templates/mod_path_image_22D_controls.html'))
@@ -65,18 +67,24 @@ define(['require',
          controls.innerHTML += mod_path_calculate_tpl(ctx)
       }
 
-      function mod_path_file_controls(routine) {
-         controls = findEl("mod_process_controls")
+      function mod_path_file_controls(routine, modname) {
+         controls = findEl("mod_manipulate")
          ctx = {
             server: globals.server
          }
          controls.innerHTML += mod_path_file_controls_tpl(ctx)
+
+         label_manipulate = findEl("mod_manipulate");
+         label_manipulate.addEventListener("click", function() {
+           console.log("event")
+           div_manipulate = findEl("mod_manipulate_menu");
+           div_manipulate.innerHTML = mod_path_file_controls_inner_tpl(ctx)
+           mod_path_file_controls_events(routine,modname);
+         });
       }
 
       // moving events out of the template building routine
       function mod_path_file_controls_events(routine,routineModName){
-         
-         
          require(['outputs/mod_' + routineModName], function(routineMod){
             
             var routineFun = routineMod[routine];
@@ -215,11 +223,10 @@ define(['require',
 
          controls.innerHTML = "<b>process</b>"
          mod_path_calculate()
-         mod_path_file_controls(routine)
+         mod_path_file_controls(routine, modname)
 
          controls.innerHTML += mod_path_image_2D_controls_tpl();
 
-         mod_path_file_controls_events(routine,modname);
          
          findEl('mod_path',false).addEventListener("click", function(ev) {
             mod_path_image_2D();
@@ -347,10 +354,8 @@ define(['require',
 
          controls.innerHTML = "<b>process</b>"
          mod_path_calculate()
-         mod_path_file_controls(routine)
+         mod_path_file_controls(routine, modname)
          controls.innerHTML += mod_path_image_21D_controls_tpl();
-
-         mod_path_file_controls_events(routine,modname)
 
          findEl('mod_path',false).addEventListener("click", function() {
             mod_path_image_21D();
@@ -511,10 +516,9 @@ define(['require',
 
          controls.innerHTML = "<b>process</b>"
          mod_path_calculate()
-         mod_path_file_controls(routine)
+         mod_path_file_controls(routine, modname)
 
          controls.innerHTML += mod_path_image_22D_controls_tpl();
-         mod_path_file_controls_events(routine,modname)
 
          findEl("mod_path",false).addEventListener("click", function() {
             mod_path_image_22D();
@@ -663,7 +667,7 @@ define(['require',
 
          controls.innerHTML = "<b>process</b>"
          mod_path_calculate()
-         mod_path_file_controls(routine)
+         mod_path_file_controls(routine, modname)
 
          controls.innerHTML += "<br>bottom z (mm):"
          if (globals.zmin == "")
@@ -672,7 +676,6 @@ define(['require',
             controls.innerHTML += "<br>&nbsp;&nbsp;&nbsp;<input type='text' id='mod_bottom_z' size='3' value='" + globals.zmin.toFixed(3) + "'>"
 
          controls.innerHTML += mod_path_image_25D_controls_tpl();
-         mod_path_file_controls_events(routine,modname);
          
          findEl("mod_path",false).addEventListener("click", function() {
             mod_path_image_25D();
@@ -789,7 +792,7 @@ define(['require',
 
          controls.innerHTML = "<b>process</b>"
          mod_path_calculate()
-         mod_path_file_controls(routine)
+         mod_path_file_controls(routine, modname)
 
          controls.innerHTML += "<br>bottom z (mm):"
          if (globals.zmin == "")
@@ -799,7 +802,6 @@ define(['require',
 
             controls.innerHTML += mod_path_image_3D_controls_tpl();
 
-         mod_path_file_controls_events(routine,modname);
          findEl("mod_path",false).addEventListener("click", function() {
             mod_path_image_3D()
          });
@@ -860,10 +862,9 @@ define(['require',
 
          controls.innerHTML = "<b>process</b>"
          mod_path_calculate()
-         mod_path_file_controls(type, routine)
+         mod_path_file_controls(routine,modname)
 
          controls.innerHTML += mod_path_image_halftone_controls_tpl();
-         mod_path_file_controls_events(routine,modname);
          
          
          findEl("mod_path",false).addEventListener("click", function() {
