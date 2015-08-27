@@ -91,6 +91,37 @@ define(['require',
          
          save_btn = findEl("mod_save");
          save_btn.addEventListener("click", function() {
+            /* logger : record process */
+
+            var input_vals = new Object();
+            var output_vals = new Object();
+            var process_vals = new Object();
+            inputs = $("#mod_input_controls > select, #mod_input_controls > input");
+            for (var i=0; i<inputs.length; i++) {
+              input_vals[inputs[i].id] = inputs[i].value;
+            }
+            outputs = $("#mod_output_controls > select, #mod_output_controls > input");
+            for (var i=0; i<outputs.length; i++) {
+              output_vals[outputs[i].id] = outputs[i].value;
+            }
+            processes = $("#mod_process_controls > select, #mod_process_controls > input");
+            for (var i=0; i<processes.length; i++) {
+              process_vals[processes[i].id] = processes[i].value;
+              console.log(processes[i].value);
+            }
+
+            $.get("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : "Process : save",
+                  params : {
+                    input : JSON.stringify(input_vals),
+                    output : JSON.stringify(output_vals),
+                    process : JSON.stringify(process_vals)
+                  }
+                });
+
+
             if (globals.path == undefined) {
                ui.ui_prompt("path not calculated");
             } else {
@@ -102,6 +133,36 @@ define(['require',
 
          send_btn = findEl("mod_send");
          send_btn.addEventListener("click", function() {
+            /* logger : record process */
+            var input_vals = new Object();
+            var output_vals = new Object();
+            var process_vals = new Object();
+            inputs = $("#mod_input_controls > select, #mod_input_controls > input");
+            for (var i=0; i<inputs.length; i++) {
+              input_vals[inputs[i].id] = inputs[i].value;
+            }
+            outputs = $("#mod_output_controls > select, #mod_output_controls > input");
+            for (var i=0; i<outputs.length; i++) {
+              output_vals[outputs[i].id] = outputs[i].value;
+            }
+            processes = $("#mod_process_controls > select, #mod_process_controls > input");
+            for (var i=0; i<processes.length; i++) {
+              process_vals[processes[i].id] = processes[i].value;
+              console.log(processes[i].value);
+            }
+
+            $.get("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : "Process : send",
+                  params : {
+                    input : JSON.stringify(input_vals),
+                    output : JSON.stringify(output_vals),
+                    process : JSON.stringify(process_vals)
+                  }
+                });
+
+
             if (globals.path == undefined) {
                ui.ui_prompt("path not calculated");
             } else {

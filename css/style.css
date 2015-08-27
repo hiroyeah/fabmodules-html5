@@ -103,7 +103,7 @@ input#mod_username {
 }
 #mod_menus > div {
   float: left;
-  width: 180px;
+  width: 170px;
   height: auto;
 }
 #mod_menus > span {
@@ -118,9 +118,9 @@ input#mod_username {
   vertical-align: middle;
 }
 .menu_label {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   display: block;
-  padding: 0.4rem;
+  padding: 0.3rem 0;
   cursor: pointer;
   background-color: white;
   text-align: center;
@@ -143,7 +143,7 @@ input#mod_username {
   border-bottom: 2px solid black;
 }
 .menu_list span {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   width: 100%;
   float: left;
   cursor: pointer;
