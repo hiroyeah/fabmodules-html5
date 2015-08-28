@@ -30,9 +30,6 @@ define(['require', 'handlebars', 'mods/mod_ui', 'mods/mod_globals', 'text!templa
       // vector input processes
       //
   
-      
-      
-      
    } else {
       //
       // raster input processes
@@ -119,13 +116,11 @@ define(['require', 'handlebars', 'mods/mod_ui', 'mods/mod_globals', 'text!templa
          ui.ui_clear()
          ui.ui_show_input()
          ui.ui_menu_process()
+         var command = findEl("mod_commands")
+         command.innerHTML = ""
+         var manipulate = findEl("mod_manipulate")
+         manipulate.innerHTML = ""
       }
-      label.onmouseover = function(e) {
-        this.setAttribute("class", "menu_label labelHover")
-      }
-      label.onmouseout = function(e) {
-        this.setAttribute("class", "menu_label")
-    }
    }
    //
    // mod_G_path

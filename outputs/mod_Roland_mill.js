@@ -116,17 +116,13 @@ define(['require', 'handlebars', 'text!templates/mod_roland_mill_controls.html',
 
    function mod_load_handler() {
       globals.output = "Roland_mill"
-      ui.ui_prompt("process?")
-
-
+//      ui.ui_prompt("process?")
       var controls = findEl("mod_output_controls")
 
       var ctx = {
          mod_xmin: globals.xmin,
          show_move : true
       }
-
-
 
       // if (globals.ymin != "") {
       //    ctx.show_move = true;
@@ -205,12 +201,10 @@ define(['require', 'handlebars', 'text!templates/mod_roland_mill_controls.html',
          ui.ui_clear()
          ui.ui_show_input()
          ui.ui_menu_process()
-      }
-      label.onmouseover = function(e) {
-        this.setAttribute("class", "menu_label labelHover")
-      }
-      label.onmouseout = function(e) {
-        this.setAttribute("class", "menu_label")
+         var command = findEl("mod_commands")
+         command.innerHTML = ""
+         var manipulate = findEl("mod_manipulate")
+         manipulate.innerHTML = ""
       }
    }
    

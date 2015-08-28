@@ -113,25 +113,10 @@ define(['require', 'handlebars', 'mods/mod_ui', 'mods/mod_globals', "text!templa
 
    function mod_load_handler() {
       globals.output = "Epilog"
-      ui.ui_prompt("process?")
+      // ui.ui_prompt("process?")
       var controls = findEl("mod_output_controls")
       controls.innerHTML = mod_epilog_controls_tpl()
 
-      /*
-      controls.innerHTML = "<br><b>output</b>"
-      controls.innerHTML += "<br>autofocus: <input type='checkbox' id='mod_autofocus'>"
-      controls.innerHTML += "<br>power (%):"
-      controls.innerHTML += "&nbsp;<input type='text' id='mod_power' size='3' value='25'>"
-      controls.innerHTML += "<br>speed (%):"
-      controls.innerHTML += "&nbsp;<input type='text' id='mod_speed' size='3' value='75'>"
-      controls.innerHTML += "<br>rate (pps):"
-      controls.innerHTML += "&nbsp;<input type='text' id='mod_rate' size='3' value='500'>"
-      controls.innerHTML += "<br>origin (mm): <br>"
-      controls.innerHTML += "x: <input type='text' id='mod_x_origin' size='3' value='50'> "
-      controls.innerHTML += "y: <input type='text' id='mod_y_origin' size='3' value='50'>"
-      controls.innerHTML += "<br><input type='radio' name='origin' id='mod_top_left' checked> left top right <input type='radio' name='origin' id='mod_top_right'>"
-      controls.innerHTML += "<br><input type='radio' name='origin' id='mod_bottom_left'> left bot right <input type='radio' name='origin' id='mod_bottom_right'>"
-       */
       var label = findEl("mod_processes_label")
       label.innerHTML = "process"
       label.style.display = "block"
@@ -139,12 +124,10 @@ define(['require', 'handlebars', 'mods/mod_ui', 'mods/mod_globals', "text!templa
          ui.ui_clear()
          ui.ui_show_input()
          ui.ui_menu_process()
-      }
-      label.onmouseover = function(e) {
-        this.setAttribute("class", "menu_label labelHover")
-      }
-      label.onmouseout = function(e) {
-        this.setAttribute("class", "menu_label")
+         var command = findEl("mod_commands")
+         command.innerHTML = ""
+         var manipulate = findEl("mod_manipulate")
+         manipulate.innerHTML = ""
       }
    }
    //
