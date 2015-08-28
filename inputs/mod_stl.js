@@ -56,6 +56,12 @@ define(['require',
       globals.input_file = file_input.files[0]
       globals.input_name = file_input.files[0].name
       globals.input_basename = fileUtils.basename(globals.input_name)
+      /* logger : record filename */
+      $.get("/record", 
+          {
+            user : document.getElementById("mod_username").value,
+            content : "Filename : " + file_input.files[0].name
+          });
       //
       // read as array buffer
       //

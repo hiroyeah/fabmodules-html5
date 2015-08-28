@@ -55,6 +55,13 @@ define(['require',
       globals.input_size = file_input.files[0].size
       globals.input_name = file_input.files[0].name
       globals.input_basename = fileUtils.basename(globals.input_name)
+
+      /* logger : record filename */
+      $.get("/record", 
+          {
+            user : document.getElementById("mod_username").value,
+            content : "Filename : " + file_input.files[0].name
+          });
       //
       // set up UI
       //
