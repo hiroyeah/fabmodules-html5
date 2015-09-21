@@ -47,7 +47,7 @@ define(['require', 'mods/mod_ui', 'mods/mod_globals', 'outputs/mod_outputs', 'mo
          globals.input_name = file_input.files[0].name
          globals.input_basename = fileUtils.basename(globals.input_name)
          /* logger : record filename */
-         $.get("/record", 
+         $.post("/record", 
              {
                user : document.getElementById("mod_username").value,
                content : "Filename : " + file_input.files[0].name

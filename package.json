@@ -4,6 +4,7 @@
   "description": "html5 fabmodules interface",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "^1.14.0",
     "express": "^4.13.2",
     "fs": "0.0.2",
     "http": "^0.0.0",

@@ -169,7 +169,7 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
             exports.ui_prompt("")
             mod_file.call(item[1])
             /* logger : record output */
-            $.get("/record", 
+            $.post("/record", 
                 {
                   user : document.getElementById("mod_username").value,
                   content : "Output : " + item[0]
@@ -217,7 +217,7 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
             exports.ui_prompt("")
             globals.myeval(item[1])
             /* logger : record username */
-            $.get("/record", 
+            $.post("/record", 
                 {
                   user : document.getElementById("mod_username").value,
                   content : item[0]
@@ -264,7 +264,7 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
             exports.ui_prompt("")
             mod_file.call(item[1])
             /* logger : record input */
-            $.get("/record", 
+            $.post("/record", 
                 {
                   user : document.getElementById("mod_username").value,
                   content : "Input : " + item[0]

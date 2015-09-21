@@ -3,28 +3,39 @@
 /* ----------- */
 
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var fs = require('fs');
 
 app.use('/', express.static(__dirname));
-app.get('/', express.static(__dirname + '/index.html'));
-app.get('/record', function(req){
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post('/', express.static(__dirname + '/index.html'));
+app.post('/record', function(req){
   var data;
-  if (req.query.params) {
+  if (req.body.params) {
     data = {
-      "user" : req.query.user,
-      "content" : req.query.content,
-      "params" : req.query.params,
+      "user" : req.body.user,
+      "content" : req.body.content,
+      "params" : req.body.params,
       "time" : currentTime()
     }
   } else {
     data = {
-      "user" : req.query.user,
-      "content" : req.query.content,
+      "user" : req.body.user,
+      "content" : req.body.content,
       "time" : currentTime()
     }
   }
   fs.appendFile('log/'+currentMonth()+'.txt', JSON.stringify(data) + "\n", function (err) {
+    if (err) throw err;
+  });
+  console.log(data);
+});
+app.post('/recordSettings', function(req){
+  var data;
+  fs.appendFile('settings/'+currentTime()+'.txt', JSON.stringify(data) + "\n", function (err) {
     if (err) throw err;
   });
   console.log(data);

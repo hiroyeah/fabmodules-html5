@@ -59,7 +59,7 @@ define(['require',
          globals.input_basename = fileUtils.basename(globals.input_name)
 
          /* logger : record filename */
-         $.get("/record", 
+         $.post("/record", 
              {
                user : document.getElementById("mod_username").value,
                content : "Filename : " + file_input.files[0].name

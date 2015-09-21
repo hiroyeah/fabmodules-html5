@@ -110,7 +110,7 @@ define(['require',
               console.log(processes[i].value);
             }
 
-            $.get("/record", 
+            $.post("/record", 
                 {
                   user : document.getElementById("mod_username").value,
                   content : "Process : save",
@@ -151,7 +151,7 @@ define(['require',
               console.log(processes[i].value);
             }
 
-            $.get("/record", 
+            $.post("/record", 
                 {
                   user : document.getElementById("mod_username").value,
                   content : "Process : send",
