@@ -46,12 +46,6 @@ define(['require', 'mods/mod_ui', 'mods/mod_globals', 'outputs/mod_outputs', 'mo
          globals.input_file = file_input.files[0]
          globals.input_name = file_input.files[0].name
          globals.input_basename = fileUtils.basename(globals.input_name)
-         /* logger : record filename */
-         $.post("/record", 
-             {
-               user : document.getElementById("mod_username").value,
-               content : "Filename : " + file_input.files[0].name
-             });
          //
          // read as text
          //
@@ -82,7 +76,20 @@ define(['require', 'mods/mod_ui', 'mods/mod_globals', 'outputs/mod_outputs', 'mo
          result = mod_svg_path_parse(str)
          if (result == false)
             return
-            //
+
+
+         /* logger : record file */
+         var formData = new FormData();
+         formData.append('files', globals.input_file);
+         formData.append('content', globals.input_name)
+         formData.append('user', document.getElementById("mod_username").value);
+         $.ajax({
+           url: "/file",
+           type: "post",
+           data: formData,
+           processData: false,
+           contentType: false,})
+           //
             // display path
             //
             //

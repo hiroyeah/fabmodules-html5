@@ -94,12 +94,12 @@ input#mod_username {
 /* MENU PANEL */
 #menu_wrapper {
   position: relative;
-  height: 3rem;
+  min-height: 3rem;
+  height: auto;
+  overflow: hidden;
+  margin-bottom: 1rem;
 }
 #mod_menus {
-  position: absolute;
-  top: 0;
-  left: 0;
 }
 #mod_menus > div {
   float: left;

@@ -4,14 +4,37 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var multer = require('multer');
 var app = express();
 var fs = require('fs');
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname)
+  }
+});
 
 app.use('/', express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer( { dest: './uploads/', storage: storage } ).single('files'));
 
 app.post('/', express.static(__dirname + '/index.html'));
+app.post('/file', function(req, res){
+  console.log(req.file); // form fields
+  data = {
+    "user" : req.body.user,
+    "content" : req.body.content,
+    "file" : req.file.filename,
+    "time" : currentTime()
+  }
+  fs.appendFile('log/'+currentMonth()+'.txt', JSON.stringify(data) + "\n", function (err) {
+    if (err) throw err;
+  });
+});
 app.post('/record', function(req){
   var data;
   if (req.body.params) {

@@ -56,12 +56,6 @@ define(['require',
       globals.input_file = file_input.files[0]
       globals.input_name = file_input.files[0].name
       globals.input_basename = fileUtils.basename(globals.input_name)
-      /* logger : record filename */
-      $.post("/record", 
-          {
-            user : document.getElementById("mod_username").value,
-            content : "Filename : " + file_input.files[0].name
-          });
       //
       // read as array buffer
       //
@@ -88,6 +82,19 @@ define(['require',
       globals.dpi = 100
       globals.width = (globals.dpi * (globals.mesh.xmax - globals.mesh.xmin) / globals.mesh.units).toFixed(0)
       //
+
+      /* logger : record file */
+      var formData = new FormData();
+      formData.append('files', globals.input_file);
+      formData.append('content', globals.input_name)
+      formData.append('user', document.getElementById("mod_username").value);
+      $.ajax({
+        url: "/file",
+        type: "post",
+        data: formData,
+        processData: false,
+        contentType: false,})
+
       //
       // set up UI
       //
@@ -112,6 +119,7 @@ define(['require',
          width: globals.width
          }
       controls.innerHTML = mod_stl_input_controls_tpl(ctx);
+
       // event handlers
       findEl("mod_units",false).addEventListener("keyup", function() {
          globals.mesh.units = parseFloat(findEl("mod_units").value);
