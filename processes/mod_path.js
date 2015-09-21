@@ -111,9 +111,9 @@ define(['require',
             }
 
             var params = {
-              input : JSON.stringify(input_vals),
-              output : JSON.stringify(output_vals),
-              process : JSON.stringify(process_vals)
+              input : input_vals,
+              output : output_vals,
+              process : process_vals
             };
 
             if (globals.path == undefined) {
@@ -160,9 +160,9 @@ define(['require',
             }
 
             var params = {
-              input : JSON.stringify(input_vals),
-              output : JSON.stringify(output_vals),
-              process : JSON.stringify(process_vals)
+              input : input_vals,
+              output : output_vals,
+              process : process_vals
             };
 
             if (globals.path == undefined) {
