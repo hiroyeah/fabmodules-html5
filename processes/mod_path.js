@@ -110,23 +110,31 @@ define(['require',
               console.log(processes[i].value);
             }
 
-            $.post("/record", 
-                {
-                  user : document.getElementById("mod_username").value,
-                  content : "Process : save",
-                  params : {
-                    input : JSON.stringify(input_vals),
-                    output : JSON.stringify(output_vals),
-                    process : JSON.stringify(process_vals)
-                  }
-                });
-
+            var params = {
+              input : JSON.stringify(input_vals),
+              output : JSON.stringify(output_vals),
+              process : JSON.stringify(process_vals)
+            };
 
             if (globals.path == undefined) {
                ui.ui_prompt("path not calculated");
             } else {
-               var file = routineFun(globals.path);
-               var name = globals.input_basename + globals.type;
+              var file = routineFun(globals.path);
+              var name = globals.input_basename + globals.type;
+
+              var formData = new FormData();
+              formData.append('filename', name);
+              formData.append('file', file);
+              formData.append('content', "Process : save");
+              formData.append('user', document.getElementById("mod_username").value);
+              formData.append('params', JSON.stringify(params));
+              $.ajax({
+                url: "/record",
+                type: "post",
+                data: formData,
+                processData: false,
+                contentType: false
+              });
                mod_file.save(name, file);
             }
          });
@@ -151,26 +159,35 @@ define(['require',
               console.log(processes[i].value);
             }
 
-            $.post("/record", 
-                {
-                  user : document.getElementById("mod_username").value,
-                  content : "Process : send",
-                  params : {
-                    input : JSON.stringify(input_vals),
-                    output : JSON.stringify(output_vals),
-                    process : JSON.stringify(process_vals)
-                  }
-                });
-
+            var params = {
+              input : JSON.stringify(input_vals),
+              output : JSON.stringify(output_vals),
+              process : JSON.stringify(process_vals)
+            };
 
             if (globals.path == undefined) {
-               ui.ui_prompt("path not calculated");
+              ui.ui_prompt("path not calculated");
             } else {
-               var file = routineFun(globals.path);
-               var name = globals.input_basename + globals.type;
-               var command = findEl("mod_command").value;
-               var server = findEl("mod_server").value;
-               mod_file.send(name, file, command, server);
+              var file = routineFun(globals.path);
+              var name = globals.input_basename + globals.type;
+
+              var formData = new FormData();
+              formData.append('filename', name);
+              formData.append('file', file);
+              formData.append('content', "Process : send");
+              formData.append('user', document.getElementById("mod_username").value);
+              formData.append('params', JSON.stringify(params));
+              $.ajax({
+                url: "/record",
+                type: "post",
+                data: formData,
+                processData: false,
+                contentType: false
+              });
+
+              var command = findEl("mod_command").value;
+              var server = findEl("mod_server").value;
+              mod_file.send(name, file, command, server);
             }
          });
          

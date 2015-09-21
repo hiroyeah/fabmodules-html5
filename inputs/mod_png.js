@@ -108,14 +108,15 @@ define(['require',
       /* logger : record file */
       var formData = new FormData();
       formData.append('files', globals.input_file);
-      formData.append('content', globals.input_name)
+      formData.append('content', globals.input_name);
       formData.append('user', document.getElementById("mod_username").value);
       $.ajax({
         url: "/file",
         type: "post",
         data: formData,
         processData: false,
-        contentType: false,})
+        contentType: false
+      });
 
       //
       // read as URL for display
