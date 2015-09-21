@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
     cb(null, './uploads')
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname)
+    cb(null, currentTime() + "-" + file.originalname)
   }
 });
 
@@ -37,11 +37,16 @@ app.post('/file', function(req, res){
 });
 app.post('/record', function(req){
   var data;
-  if (req.body.params) {
+  if (req.body.params && req.body.file) {
+    var filename = currentTime() + '-' + req.body.filename;
+    fs.writeFile('./uploads/' + filename, req.body.file, function (err) {
+      if (err) throw err;
+    });
     data = {
       "user" : req.body.user,
       "content" : req.body.content,
       "params" : req.body.params,
+      "file" : filename,
       "time" : currentTime()
     }
   } else {
