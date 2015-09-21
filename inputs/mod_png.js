@@ -55,12 +55,6 @@ define(['require',
       globals.input_file = file_input.files[0]
       globals.input_name = file_input.files[0].name
       globals.input_basename = file.basename(globals.input_name)
-      /* logger : record filename */
-      $.post("/record", 
-          {
-            user : document.getElementById("mod_username").value,
-            content : "Filename : " + file_input.files[0].name
-          });
       //
       // read as binary string
       //
@@ -110,6 +104,19 @@ define(['require',
          ppx = 72 * 1000 / 25.4
       }
       globals.dpi = ppx * 25.4 / 1000
+
+      /* logger : record file */
+      var formData = new FormData();
+      formData.append('files', globals.input_file);
+      formData.append('content', globals.input_name)
+      formData.append('user', document.getElementById("mod_username").value);
+      $.ajax({
+        url: "/file",
+        type: "post",
+        data: formData,
+        processData: false,
+        contentType: false,})
+
       //
       // read as URL for display
       //
@@ -123,6 +130,8 @@ define(['require',
    //
 
    function mod_png_URL_load_handler(event) {
+     // console.log(event.target.result);
+
       //
       // read and display image
       //
@@ -131,18 +140,23 @@ define(['require',
       img.onload = function() {
          globals.width = img.width
          globals.height = img.height
+
          var process_canvas = findEl("mod_process_canvas")
          process_canvas.width = img.width
          process_canvas.height = img.height
+
          var output_canvas = findEl("mod_output_canvas")
          output_canvas.width = img.width
          output_canvas.height = img.height
+
          var canvas = findEl("mod_input_canvas")
          canvas.width = img.width
          canvas.height = img.height
          canvas.style.display = "inline"
+
          var ctx = canvas.getContext("2d")
          ctx.drawImage(img, 0, 0)
+
          var input_img = ctx.getImageData(0, 0, canvas.width, canvas.height)
          imageUtils.flatten(input_img)
          ctx.putImageData(input_img, 0, 0)
@@ -164,6 +178,7 @@ define(['require',
          controls.innerHTML = input_controls_tpl(ctx);
 
          var file_input = findEl("mod_file_input")
+
          findEl("mod_dpi",false).addEventListener("keyup", function() {
             globals.dpi = parseFloat(findEl("mod_dpi").value);
             findEl("mod_mm").innerHTML = (25.4 * globals.width / globals.dpi).toFixed(3) + " x " + (25.4 * globals.height / globals.dpi).toFixed(3) + " mm";
@@ -179,6 +194,7 @@ define(['require',
             imageUtils.invert(img);
             ctx.putImageData(img, 0, 0);
          });
+
       }
       //
       // call outputs
