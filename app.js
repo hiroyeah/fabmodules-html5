@@ -24,7 +24,7 @@ app.use(multer( { dest: './uploads/', storage: storage } ).single('files'));
 
 app.post('/', express.static(__dirname + '/index.html'));
 app.post('/file', function(req, res){
-  console.log(req.file); // form fields
+  /* Input files */
   data = {
     "user" : req.body.user,
     "content" : req.body.content,
@@ -38,6 +38,7 @@ app.post('/file', function(req, res){
 app.post('/record', function(req){
   var data;
   if (req.body.params && req.body.file) {
+    /* Output files */
     var filename = currentTime() + '-' + req.body.filename;
     fs.writeFile('./uploads/' + filename, req.body.file, function (err) {
       if (err) throw err;

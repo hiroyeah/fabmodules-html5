@@ -91,6 +91,18 @@ input#mod_username {
   font-size: 0.8rem;
 }
 
+#settings_wrapper {
+  float: right;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+#settings_wrapper span {
+  padding: 0 5px;
+}
+#settings_wrapper span:hover {
+  text-decoration: underline;
+}
+
 /* MENU PANEL */
 #menu_wrapper {
   position: relative;
