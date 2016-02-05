@@ -74,9 +74,8 @@ define(['require',
          }
          controls.innerHTML += mod_path_file_controls_tpl(ctx)
 
-         label_manipulate = findEl("mod_manipulate");
+         label_manipulate = findEl("mod_manipulate_label");
          label_manipulate.addEventListener("click", function() {
-           console.log("event")
            div_manipulate = findEl("mod_manipulate_menu");
            div_manipulate.innerHTML = mod_path_file_controls_inner_tpl(ctx)
            mod_path_file_controls_events(routine,modname);
