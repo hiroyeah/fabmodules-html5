@@ -111,8 +111,6 @@ input#mod_username {
   overflow: hidden;
   margin-bottom: 1rem;
 }
-#mod_menus {
-}
 #mod_menus > div {
   float: left;
   width: 170px;
@@ -128,6 +126,10 @@ input#mod_username {
 #mod_menus > span p {
   display: table-cell;
   vertical-align: middle;
+}
+#mod_menus #mod_manipulate input[type="text"] {
+  display: inline-block;
+  margin: 0.2rem;
 }
 .menu_label {
   font-size: 0.9rem;
