@@ -17,7 +17,15 @@ define(['require', 'mods/mod_ui'], function(require) {
    //
    // output types and handlers
    //
-   var output_array = [
+var output_array = [
+      ["Epilog Laser (.epi)", "outputs/mod_Epilog.js"],
+      ["Trotec Laser (.tro)", "outputs/mod_Trotec.js"],
+      ["GCC Laser (.gcc)", "outputs/mod_GCC_laser.js"],
+      ["Roland Milling (.rml)", "outputs/mod_Roland_mill.js"],
+      ["Roland Paper (.camm)", "outputs/mod_Roland_vinyl.js"]
+   ]
+
+  /* var output_array = [
       ["SVG (.svg)", "outputs/mod_svg.js"],
       ["PostScript (.eps)", "outputs/mod_eps.js"],
       ["Epilog laser (.epi)", "outputs/mod_Epilog.js"],
@@ -39,7 +47,7 @@ define(['require', 'mods/mod_ui'], function(require) {
       ["Omax waterjet (.ord)", ""],
       ["mesh (.stl)", ""],
       ["MTM (VM)", ""]
-   ]
+   ] */
    //
    // mod_outputs
    //    set up outputs menu
@@ -47,22 +55,22 @@ define(['require', 'mods/mod_ui'], function(require) {
 
       function mod_outputs() {
          var label = document.getElementById("mod_outputs_label")
-         label.innerHTML = "output format"
+         label.innerHTML = "(3/6) output format"
          label.style.display = "block"
          label.onclick = function(e) {
             ui.ui_clear()
             var input_canvas = document.getElementById("mod_input_canvas")
             input_canvas.style.display = "inline"
             var label = document.getElementById("mod_processes_label")
-            label.style.display = "none"
+            //label.style.display = "none"
             var div = document.getElementById("mod_output_controls")
-            div.innerHTML = ""
+            //div.innerHTML = ""
             var div = document.getElementById("mod_process_controls")
-            div.innerHTML = ""
+            //div.innerHTML = ""
             var div = document.getElementById("mod_commands")
-            div.innerHTML = ""
+            //div.innerHTML = ""
             var div = document.getElementById("mod_manipulate")
-            div.innerHTML = ""
+            //div.innerHTML = ""
             ui.ui_menu_action(output_array, "mod_outputs")
          }
       }

@@ -105,7 +105,7 @@ define(['require', 'handlebars', 'mods/mod_ui', 'mods/mod_globals', 'text!templa
       var controls = findEl("mod_output_controls")
       controls.innerHTML = mod_g_controls_tpl();
       var label = findEl("mod_processes_label")
-      label.innerHTML = "process"
+      label.innerHTML = "(4/6) process"
       label.style.display = "block"
       label.onclick = function(e) {
          ui.ui_clear()

@@ -1,21 +1,39 @@
 define(['mods/mod_ui', 'inputs/mod_inputs'], function(ui, inputs) {
+
+
+
   function mod_users() {
-    var name = document.getElementById("mod_username");
-    name.addEventListener("keypress", function(e) {
-      if (e.keyCode == 13) {
-        if (name.value) {
+
+ var label = document.getElementById("mod_user_label");
+
+    label.onclick = function(e) {
+
           var name_wrapper = document.getElementById("mod_user_menu");
           name_wrapper.setAttribute("style", "display:none");
           inputs.initInputs();
-        }
+    }
+
+
+
+    var name = document.getElementById("mod_username");
+  
+
+    name.addEventListener("keypress", function(e) {
+      if (e.keyCode == 13) {
+console.log("keycode13");
+       // if (name.value) {
+          var name_wrapper = document.getElementById("mod_user_menu");
+          name_wrapper.setAttribute("style", "display:none");
+          inputs.initInputs();
+       // }
       }
     }, false)
     name.addEventListener("change", function(e) {
-      if (name.value) {
+    //  if (name.value) {
         var name_wrapper = document.getElementById("mod_user_menu");
         name_wrapper.setAttribute("style", "display:none");
         inputs.initInputs();
-      }
+     // }
     }, false)
 
     var load_settings = document.getElementById("load_settings");
@@ -68,7 +86,7 @@ define(['mods/mod_ui', 'inputs/mod_inputs'], function(ui, inputs) {
       };
 
       var download_link = document.getElementById("mod_download")
-      download_link.download = Date.now() + ".setting";
+      download_link.download = Date.now() + "-setting.json";
       download_link.href = "data:application/octet-stream," + encodeURI(JSON.stringify(params));
       var click_event = document.createEvent("MouseEvents")
       click_event.initEvent("click", true, false)

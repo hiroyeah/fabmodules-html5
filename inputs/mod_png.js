@@ -13,6 +13,7 @@
 //
 
 define(['require',
+
    'handlebars',
    'mods/mod_ui',
    'mods/mod_globals',
@@ -52,9 +53,17 @@ define(['require',
       // get input file
       //
       var file_input = findEl("mod_file_input")
-      globals.input_file = file_input.files[0]
-      globals.input_name = file_input.files[0].name
-      globals.input_basename = file.basename(globals.input_name)
+
+       globals.input_file =  file_input.files[0]
+       globals.input_name =  file_input.files[0].name
+       globals.input_basename = file.basename(globals.input_name)
+
+
+
+      // globals.input_file =  file_input.files[0]
+      // globals.input_name =  file_input.files[0].name
+      // globals.input_basename = file.basename(globals.input_name)
+      
       //
       // read as binary string
       //
@@ -105,18 +114,37 @@ define(['require',
       }
       globals.dpi = ppx * 25.4 / 1000
 
+
+
       /* logger : record file */
+     /* logger : record file */
       var formData = new FormData();
-      formData.append('files', globals.input_file);
-      formData.append('content', globals.input_name);
-      formData.append('user', document.getElementById("mod_username").value);
+      var newname = Date.now()+'-'+globals.input_name;
+
+
+
+      var files =  globals.input_file;
+      var name = globals.input_name;
+
+      formData.append('files', files);
+      formData.append('filename', name);
+      formData.append('content',newname);
+
+console.log(newname);
+
       $.ajax({
-        url: "/file",
+        url: "/uploads",
         type: "post",
         data: formData,
         processData: false,
         contentType: false
       });
+
+ globals.input_name = newname;
+
+
+
+
 
       //
       // read as URL for display

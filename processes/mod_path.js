@@ -1,14 +1,15 @@
-//
+// 2016 03 22 Hiroya Tanaka
+
 // mod_path.js
 //   fab modules path calculation routines
 //
-// Neil Gershenfeld 
+// Neil Gershenfeld
 // (c) Massachusetts Institute of Technology 2014
-// 
-// This work may be reproduced, modified, distributed, performed, and 
-// displayed for any purpose, but must acknowledge the fab modules 
-// project. Copyright is retained and must be preserved. The work is 
-// provided as is; no warranty is provided, and users accept all 
+//
+// This work may be reproduced, modified, distributed, performed, and
+// displayed for any purpose, but must acknowledge the fab modules
+// project. Copyright is retained and must be preserved. The work is
+// provided as is; no warranty is provided, and users accept all
 // liability.
 //
 
@@ -85,9 +86,9 @@ define(['require',
       // moving events out of the template building routine
       function mod_path_file_controls_events(routine,routineModName){
          require(['outputs/mod_' + routineModName], function(routineMod){
-            
+
             var routineFun = routineMod[routine];
-         
+
          save_btn = findEl("mod_save");
          save_btn.addEventListener("click", function() {
             /* logger : record process */
@@ -106,7 +107,7 @@ define(['require',
             processes = $("#mod_process_controls > select, #mod_process_controls > input");
             for (var i=0; i<processes.length; i++) {
               process_vals[processes[i].id] = processes[i].value;
-              console.log(processes[i].value);
+             // console.log(processes[i].value);
             }
 
             var params = {
@@ -118,23 +119,115 @@ define(['require',
             if (globals.path == undefined) {
                ui.ui_prompt("path not calculated");
             } else {
-              var file = routineFun(globals.path);
-              var name = globals.input_basename + globals.type;
+
+// save input file to the server 
+/*
+    var inputfile =  globals.input_name_timestamp;
+    var inputname =  globals.input_file;
+
+
+      var formData = new FormData();
+       formData.append('filename', globals.input_name_timestamp);
+       formData.append('files', inputfile);
+
+       console.log('png upload filename '+  globals.input_name_timestamp);
+       console.log('png upload file '+   globals.input_file);
+
+      $.ajax({
+        url: "/uploads",
+        type: "post",
+        data: formData,
+        processData: false,
+        contentType: false
+      });
+
+*/
+
+
+///save setting file to the server
+
+
+              var settingfile = Date.now()+'-setting.json';
+
+console.log('input '+input_vals);
+console.log('output '+output_vals);
+console.log('process '+process_vals);
 
               var formData = new FormData();
-              formData.append('filename', name);
-              formData.append('file', file);
-              formData.append('content', "Process : save");
-              formData.append('user', document.getElementById("mod_username").value);
-              formData.append('params', JSON.stringify(params));
+formData.append('file',JSON.stringify(params));
+             // formData.append('input',input_vals);
+             // formData.append('output',output_vals);
+             // formData.append('process' ,process_vals);
+              formData.append('filename',settingfile);
+
               $.ajax({
-                url: "/record",
+                url: "/settings",
                 type: "post",
                 data: formData,
                 processData: false,
                 contentType: false
               });
-               mod_file.save(name, file);
+
+
+   var file = routineFun(globals.path);
+   var name =  Date.now()+'-'+globals.input_basename + globals.type;
+
+//// save output file to local
+  mod_file.save(name, file);
+
+/// save output file to the server
+
+
+
+      var formData = new FormData();
+              formData.append('filename', name);
+              formData.append('file', file);
+
+      console.log('uploads:filename '+ name);
+      console.log('uploads:file '+ file);
+
+      $.ajax({
+        url: "/uploadsout",
+        type: "post",
+        data: formData,
+        processData: false,
+        contentType: false
+      });
+
+
+//// save logs
+
+              var formData = new FormData();
+
+if (document.getElementById("mod_username").value.includes(',')){
+              formData.append('location', document.getElementById("mod_username").value);
+} else { 
+ formData.append('location', "nodata");
+}
+              formData.append('input', globals.input_name);
+              formData.append('output', name);
+              formData.append('settings', settingfile);
+            //  formData.append('content', "Process : save");
+
+//              formData.append('params', JSON.stringify(params));
+
+
+      console.log('log:location '+ document.getElementById("mod_username").value);
+      console.log('log:input '+ globals.input_name);
+    console.log('log:output '+  name );
+    console.log('log:settings '+ settingfile );
+
+
+              $.ajax({
+                url: "/logs",
+                type: "post",
+                data: formData,
+                processData: false,
+                contentType: false
+              });
+
+
+
             }
          });
 
@@ -155,9 +248,10 @@ define(['require',
             processes = $("#mod_process_controls > select, #mod_process_controls > input");
             for (var i=0; i<processes.length; i++) {
               process_vals[processes[i].id] = processes[i].value;
-              console.log(processes[i].value);
+            //  console.log(processes[i].value);
             }
 
+/*
             var params = {
               input : input_vals,
               output : output_vals,
@@ -171,8 +265,11 @@ define(['require',
               var name = globals.input_basename + globals.type;
 
               var formData = new FormData();
+
+              formData.append('content', mod_file_basename);
               formData.append('filename', name);
-              formData.append('file', file);
+              formData.append('file', output);
+
               formData.append('content', "Process : send");
               formData.append('user', document.getElementById("mod_username").value);
               formData.append('params', JSON.stringify(params));
@@ -183,13 +280,15 @@ define(['require',
                 processData: false,
                 contentType: false
               });
+                  }
+*/
 
               var command = findEl("mod_command").value;
               var server = findEl("mod_server").value;
               mod_file.send(name, file, command, server);
-            }
+
          });
-         
+
          });
       }
       //
@@ -304,7 +403,7 @@ define(['require',
 
          controls.innerHTML += mod_path_image_2D_controls_tpl();
 
-         
+
          findEl('mod_path',false).addEventListener("click", function(ev) {
             mod_path_image_2D();
          });
@@ -753,7 +852,7 @@ define(['require',
             controls.innerHTML += "<br>&nbsp;&nbsp;&nbsp;<input type='text' id='mod_bottom_z' size='3' value='" + globals.zmin.toFixed(3) + "'>"
 
          controls.innerHTML += mod_path_image_25D_controls_tpl();
-         
+
          findEl("mod_path",false).addEventListener("click", function() {
             mod_path_image_25D();
          });
@@ -942,8 +1041,8 @@ define(['require',
          mod_path_file_controls(routine,modname)
 
          controls.innerHTML += mod_path_image_halftone_controls_tpl();
-         
-         
+
+
          findEl("mod_path",false).addEventListener("click", function() {
             mod_path_image_halftone_calculate()
          });

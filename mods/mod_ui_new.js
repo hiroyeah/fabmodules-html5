@@ -159,31 +159,23 @@ define(['mods/mod_globals', 'mods/mod_file'], function(globals, mod_file) {
    //
    var ui_menu_action_item = function(item, menu, label) {
       var span = document.createElement("span")
-console.log("0");
       if (item[1] != "") {
          span.innerHTML = item[0]
          span.addEventListener("click", function(e) {
-console.log("1");
             if (menu.hasChildNodes()) {
                menu.innerHTML = ""
             }
             label.innerHTML = item[0]
             exports.ui_prompt("")
-
- 
             mod_file.call(item[1])
             /* logger : record output */
-  //          $.post("/record", 
-  //              {
-   //               user : document.getElementById("mod_username").value,
-  //                content : "Output : " + item[0]
-  //              });
-  
-
-
+            $.post("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : "Output : " + item[0]
+                });
          }, false)
       } else {
-console.log("2");
          span.setAttribute("class", "disabledList")
          span.innerHTML = item[0]
       }
@@ -215,10 +207,9 @@ console.log("2");
       var menu = findEl(name + "_menu")
       var label = findEl(name + "_label")
       var span = document.createElement("span")
-       if (item[1] != "") {
+      if (item[1] != "") {
          span.innerHTML = item[0]
          span.addEventListener("click", function(e) {
-console.log("click2");
             if (menu.hasChildNodes()) {
                menu.innerHTML = ""
             }
@@ -226,11 +217,11 @@ console.log("click2");
             exports.ui_prompt("")
             globals.myeval(item[1])
             /* logger : record username */
-  //          $.post("/record", 
-  //              {
-  //                user : document.getElementById("mod_username").value,
- //                 content : item[0]
-//                });
+            $.post("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : item[0]
+                });
          }, false)
       } else {
          span.setAttribute("class", "disabledList")
@@ -266,7 +257,6 @@ console.log("click2");
       if (item[1] != "") {
          span.innerHTML = item[0]
          span.addEventListener("click", function(e) {
-console.log("click3");
             if (menu.hasChildNodes()) {
                menu.innerHTML = ""
             }
@@ -274,11 +264,11 @@ console.log("click3");
             exports.ui_prompt("")
             mod_file.call(item[1])
             /* logger : record input */
-  //          $.post("/record", 
-  //              {
-  //                user : document.getElementById("mod_username").value,
-  //                content : "Input : " + item[0]
-  //              });
+            $.post("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : "Input : " + item[0]
+                });
             var file = findEl("mod_file_input")
             file.click()
          }, false)
@@ -316,7 +306,6 @@ console.log("click3");
       if (item[1] != "") {
          span.innerHTML = item[0]
          span.addEventListener("click", function(e) {
-console.log("click4");
             if (menu.hasChildNodes()) {
                menu.innerHTML = ""
             }
@@ -326,11 +315,11 @@ console.log("click4");
             var key = "edit_" + item[1].slice(0, -2) + globals.output
             if (globals.process_edits[key] != undefined)
                globals.myeval(globals.process_edits[key].func + "()")
-   //         $.get("/record", 
-   //             {
-   //               user : document.getElementById("mod_username").value,
-   //               content : "Process : " + item[0],
-   //             });
+            $.get("/record", 
+                {
+                  user : document.getElementById("mod_username").value,
+                  content : "Process : " + item[0],
+                });
          }, false)
       } else {
          span.setAttribute("class", "disabledList")

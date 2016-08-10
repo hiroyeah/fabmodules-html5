@@ -72,7 +72,7 @@ define(['require',
       var controls = document.getElementById("mod_output_controls")
       controls.innerHTML = ""
       var label = document.getElementById("mod_processes_label")
-      label.innerHTML = "process"
+      label.innerHTML = "(4/6) process"
       label.style.display = "block"
       label.onclick = function(e) {
          ui.ui_clear()

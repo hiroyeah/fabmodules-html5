@@ -195,7 +195,7 @@ define(['require', 'handlebars', 'text!templates/mod_roland_mill_controls.html',
       });
 
       var label = findEl("mod_processes_label")
-      label.innerHTML = "process"
+      label.innerHTML = "(4/6) process"
       label.style.display = "block"
       label.onclick = function(e) {
          ui.ui_clear()
