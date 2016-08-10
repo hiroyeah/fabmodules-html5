@@ -16,16 +16,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Fab Modules</title>
     <script type="text/javascript" data-main="main" src="./require.js"></script>
-
- 
-
     <link href="./css/style.css" type="text/css" rel="stylesheet" />
-<style type="text/css">
-body {
-	background-color: #00BEFF;
-	background-image: url(fab9_back_sheets.png);
-}
-</style>
   </head>
 
   <body>
@@ -33,41 +24,21 @@ body {
     <input type="file" id="setting_file" style="display:none;" />
 
     <p id="settings_wrapper">
-      <span><a href="/vis/" target="_blank"><b>VISUALIZATION MODE</b></a></span><br>
-      <span><a href="http://fabble.cc/search?q=FabCam" target="_blank"><b>DOCUMENTATION</b></a></span><br>
-      <span id="save_settings"><b>SAVE SETTING</b></span>  |  
-      <span id="load_settings"><b>LOAD SETTING</b></span>
+      <span id="save_settings">SAVE SETTING</span>  |  
+      <span id="load_settings">LOAD SETTING</span>
     </p>
-   <h4><span id="mod_logo"></span>Fab (Lab) CAM</h4>
-        <p><h6><a href="http://fabmodules.org/" class="fukidashi" title="This work may be reproduced, modified, distributed, performed, and displayed for any purpose, but must acknowledge the fab modules project. Copyright is retained and must be preserved. The work is provided as is; no warranty is provided, and users accept all liability."> a.k.a. Fab Modules by Neil Gershenfeld (c) Massachusetts Institute of Technology 2014</a></h6></p>
-    <p><h6><a href="http://sfc.sfc.keio.ac.jp/" class="fukidashi" title="FabCam CSS Design and Save/Load/Logging are developed in Japan"> FabCam CSS by Ken Fujiyoshi and Hiroya Tanaka (c) Social Fabrication Lab Keio University SFC 2015</a></h6></p><p></p><p></p>
- <hr color="black"><p></p>
+    <h1><span id="mod_logo"></span>Fab Modules HTML5</h1>
     
     <!-- <span id="mod_prompt"></span> -->
 
     <div id="menu_wrapper">
       <div id="mod_menus">
         <div id="mod_user">
-          <span id="mod_user_label" class="menu_label">(1/6) Confirm Your Location</span>
+          <span id="mod_user_label" class="menu_label">User Login</span>
           <div id="mod_user_menu" class="menu_list">
             <span>
-              <input type="text" id="mod_username" value="somewhere on the Earth" placeholder="somewhere on the Earth" />
+              <input type="text" id="mod_username" placeholder="Write your name" />
             </span>
-   <script>
-   
- window.onload = function() {
-          if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(function(position) {
-                  document.getElementById('mod_username').value =  position.coords.latitude + ',' + position.coords.longitude;
-              }, function(e) {
-                  document.getElementById('mod_username').value = typeof e == 'string' ? e : e.message;
-              });
-          } else {
-              document.getElementById('mod_username').value = 'Location API unabled';
-          }
-      };
-
-    </script>
           </div>
         </div>
 
